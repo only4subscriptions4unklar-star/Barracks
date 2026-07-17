@@ -1513,6 +1513,19 @@ Object.entries(BRAND_PHOTOS).forEach(([id,o])=>{
   if(p) Object.assign(p,o);
 });
 
+/* Real store bridge — each piece links to its live barracks.lk collection,
+   where the brand's actual photography and current stock live. */
+const SHOP_URLS = {
+  trousers:"https://barracks.lk/collections/pants-1",
+  tees:"https://barracks.lk/collections/tees",
+  shirting:"https://barracks.lk/collections/all",
+  outerwear:"https://barracks.lk/collections/all"
+};
+const shopUrl = p =>
+  p.id===3 ? "https://barracks.lk/collections/baggy-big-fold-pants" :
+  p.id===6 ? "https://barracks.lk/collections/drifit-crew-tees" :
+  SHOP_URLS[p.cat] || "https://barracks.lk/collections/all";
+
 const CATS = [
   {key:"all", label:"All Pieces"},
   {key:"trousers", label:"Trousers"},
@@ -1800,6 +1813,9 @@ function renderPDP(){
           Enquire on WhatsApp</a>
         <button class="btn btn-block" style="border-color:var(--hairline)" onclick="toggleWl(${p.id})">
           ${wl.has(p.id)?"Saved to Your List":"Save for Consideration"}</button>
+        <div style="text-align:center;padding-top:8px">
+          <a class="tlink olive" href="${shopUrl(p)}" target="_blank" rel="noopener">Current stock &amp; photography on barracks.lk</a>
+        </div>
       </div>
 
       <div class="pdp-acc">
