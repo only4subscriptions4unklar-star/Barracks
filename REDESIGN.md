@@ -253,6 +253,15 @@ first "clean iOS" prototype (`prototype/index.html`):
 Photography remains Unsplash placeholder; the §4 open questions (palette verification,
 tagline sign-off, policy numbers) apply to this build equally.
 
+**Device-optimization pass (17 Jul 2026).** Verified clean (no horizontal overflow, no
+JS errors, working buy flows) across 320/360/390/768/820/1024/1280/1536px viewports plus
+landscape phone. Touch devices get ≥44px tap targets, no hover-dependent UI, and
+full-color maps; iOS input-zoom is prevented (16px form inputs); the hero uses `svh`
+units for mobile URL-bar behavior; safe-area insets cover notched phones; tablets get
+dedicated grid steps (3-up shop at 768px, 2-up stores/collections); and the heavy
+TikTok/Instagram embed scripts lazy-load only when the trending section approaches the
+viewport.
+
 **Live-content update (17 Jul 2026).** Three classes of real content are now wired in:
 
 - **Trending social section** — real @barracksclothing posts embedded live (two TikTok
