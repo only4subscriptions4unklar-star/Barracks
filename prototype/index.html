@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barracks Clothing — Always different. That's the standard.</title>
+<meta name="description" content="Menswear from Kohuwala & Dehiwala. Linen, chinos, oversize tees. Island-wide delivery across Sri Lanka.">
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!--
+  PHOTOGRAPHY NOTE (for the client pitch):
+  All photos are free-license Unsplash placeholders standing in for Barracks' own
+  product & campaign photography. Each is one URL — swap with brand shoots any time.
+  Every image has an automatic fallback to a designed tile, so the layout never breaks.
+-->
+<style>
+/* ============================================================
+   BARRACKS CLOTHING — pitch prototype · clean iOS direction
+   white + #F5F5F7 surfaces · ink #1D1D1F · tint: Barracks olive
+   signal orange reserved for the 2-for-5,000 offer only
+   ============================================================ */
+:root{
+  --ink:#1D1D1F;
+  --ink-2:#6E6E73;
+  --ink-3:#AEAEB2;
+  --bg:#FFFFFF;
+  --surface:#F5F5F7;
+  --surface-2:#EDEDF0;
+  --tint:#4A5240;
+  --tint-deep:#3A4132;
+  --tint-soft:rgba(74,82,64,.10);
+  --signal:#E8722E;
+  --signal-soft:rgba(232,114,46,.14);
+  --hairline:rgba(29,29,31,.10);
+  --radius-l:22px;
+  --radius-m:16px;
+  --radius-s:12px;
+  --shadow-card:0 1px 2px rgba(29,29,31,.05),0 8px 24px rgba(29,29,31,.06);
+  --shadow-pop:0 2px 8px rgba(29,29,31,.08),0 18px 48px rgba(29,29,31,.16);
+  --font:"Manrope",-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-disp:"Space Grotesk",-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;
+  --font-accent:Georgia,"Times New Roman",serif;
+  --ease:cubic-bezier(.25,.1,.25,1);
+  --spring:cubic-bezier(.32,1.25,.4,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.5;
+  letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
+::selection{background:var(--tint);color:#fff}
+
+/* ── typography voices ─────────────────────────────
+   display  : Space Grotesk — headings, nav, buttons, prices, labels
+   text     : Manrope — body copy, descriptions, forms
+   accent   : Georgia italic — logo B, hero tagline, editorial lines
+   ─────────────────────────────────────────────────── */
+h1,h2,h3,h4{font-family:var(--font-disp);font-weight:700;letter-spacing:-.02em}
+.pill,.nav-links button,.seg button,.sort select,.cart-btn,.chip,
+.price,.subtotal,.eyebrow,.hero-eyebrow,footer h4,.badge,.follow-pill,
+.marquee span,.hero-stat b,.fact-card b,.how-step b,.how-step i,
+.prod-body>b,.drawer-head b,.ci b,.s-row b,.t-step b,.status-pill,
+.offer-chip,.bundle-chip,.size-btn,.opt-label,.spec-row dt,.count-note,
+.offer-strip,.offer-applied,.acc-head,.tlink,.sec-link,.search-esc,.pay-badges span{
+  font-family:var(--font-disp);
+}
+.eyebrow{font-size:13px;font-weight:600;color:var(--tint);margin-bottom:8px;display:block;letter-spacing:.02em}
+.muted{color:var(--ink-2)}
+
+/* ---------- scroll reveal ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv-stagger>*{opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.rv-stagger.in>*{opacity:1;transform:none}
+.rv-stagger.in>*:nth-child(1){transition-delay:.02s}
+.rv-stagger.in>*:nth-child(2){transition-delay:.1s}
+.rv-stagger.in>*:nth-child(3){transition-delay:.18s}
+.rv-stagger.in>*:nth-child(4){transition-delay:.26s}
+.rv-stagger.in>*:nth-child(5){transition-delay:.34s}
+.rv-stagger.in>*:nth-child(6){transition-delay:.42s}
+
+/* ---------- image layers (photo over designed tile, graceful fallback) ---------- */
+.img-layer{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .6s var(--ease),transform .8s var(--ease);
+}
+.img-layer.loaded{opacity:1}
+.img-layer.gone{display:none}
+
+/* ---------- offer strip ---------- */
+.offer-strip{
+  display:block;background:#26282B;color:#fff;
+  font-size:12.5px;font-weight:500;text-align:center;
+  padding:9px 16px;position:relative;z-index:85;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.offer-strip b{color:var(--signal);font-weight:600}
+.offer-strip span.cta{opacity:.65;margin-left:8px}
+.offer-strip:hover span.cta{opacity:1}
+
+/* ---------- header (dark editorial, centered logo) ---------- */
+header{
+  position:sticky;top:0;z-index:80;
+  background:rgba(17,18,19,.82);
+  backdrop-filter:saturate(160%) blur(20px);
+  -webkit-backdrop-filter:saturate(160%) blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  color:#fff;
+}
+.nav-wrap{
+  max-width:1120px;margin:0 auto;padding:0 22px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;height:60px;
+}
+.nav-ctrls{display:flex;align-items:center;gap:8px;justify-self:end}
+.brand{display:flex;align-items:center;gap:11px;flex-shrink:0;justify-self:center}
+.brand-box{height:36px;width:36px;color:#fff;flex-shrink:0}
+.wordmark{font-size:15px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff;font-family:Georgia,serif}
+.wordmark small{display:block;font-size:7.5px;letter-spacing:.46em;font-weight:600;color:rgba(255,255,255,.55);margin-top:0}
+.nav-links{display:flex;gap:2px;align-items:center;justify-self:start}
+.nav-links button{
+  font-size:13px;font-weight:500;color:rgba(255,255,255,.62);
+  padding:7px 12px;border-radius:980px;
+  transition:color .18s var(--ease),background .18s var(--ease);
+}
+.nav-links button:hover{color:#fff}
+.nav-links button.active{color:#fff;background:rgba(255,255,255,.12)}
+.nav-links .nav-offer{color:var(--signal);font-weight:600}
+.icon-btn{background:rgba(255,255,255,.1)}
+.icon-btn:hover{background:rgba(255,255,255,.2)}
+.icon-btn svg{stroke:#fff}
+.cart-btn{
+  display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;
+  background:#fff;color:var(--ink);padding:8px 16px;border-radius:980px;
+  transition:transform .18s var(--ease),background .18s var(--ease);
+}
+.cart-btn:hover{background:#E8E8EA}
+.cart-btn:active{transform:scale(.96)}
+.cart-count{
+  background:var(--ink);color:#fff;border-radius:50%;
+  min-width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;
+}
+.cart-count.bump{animation:bump .35s var(--ease)}
+@keyframes bump{40%{transform:scale(1.4)}}
+@media(max-width:760px){
+  .nav-wrap{height:56px;grid-template-columns:auto 1fr}
+  .brand{justify-self:start}
+  .wordmark{font-size:13px}
+  .nav-links{
+    position:absolute;left:0;right:0;top:100%;
+    background:rgba(17,18,19,.92);
+    backdrop-filter:saturate(160%) blur(20px);
+    -webkit-backdrop-filter:saturate(160%) blur(20px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    justify-content:flex-start;padding:4px 14px;overflow-x:auto;
+  }
+  .nav-links button{white-space:nowrap;padding:9px 13px}
+  main{padding-top:46px}
+}
+
+/* ---------- pages ---------- */
+.page{display:none}
+.page.on{display:block;animation:pageIn .32s var(--ease)}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.shell{max-width:1120px;margin:0 auto;padding:0 22px}
+section{padding:64px 0}
+
+/* ---------- pills ---------- */
+.pill{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-size:14.5px;font-weight:600;letter-spacing:-.01em;
+  padding:12px 24px;border-radius:980px;
+  transition:transform .18s var(--ease),background .18s var(--ease),box-shadow .18s var(--ease);
+  user-select:none;
+}
+.pill:active{transform:scale(.97)}
+.pill-dark{background:var(--ink);color:#fff}
+.pill-dark:hover{background:#000}
+.pill-tint{background:var(--tint);color:#fff}
+.pill-tint:hover{background:var(--tint-deep)}
+.pill-gray{background:var(--surface);color:var(--ink)}
+.pill-gray:hover{background:var(--surface-2)}
+.pill-white{background:#fff;color:var(--ink);box-shadow:var(--shadow-card)}
+.pill-white:hover{box-shadow:var(--shadow-pop)}
+.pill-frost{
+  background:rgba(255,255,255,.16);color:#fff;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
+}
+.pill-frost:hover{background:rgba(255,255,255,.28)}
+.pill-signal{background:var(--signal);color:#fff}
+.pill-signal:hover{background:#D2601F}
+.pill-block{width:100%}
+.tlink{color:var(--tint);font-weight:600;font-size:14.5px}
+.tlink:hover{text-decoration:underline}
+
+/* ============================================================
+   HERO — full-bleed cinematic slideshow (Ken Burns crossfade)
+   ============================================================ */
+.hero{
+  position:relative;height:min(88vh,760px);min-height:540px;
+  display:flex;align-items:flex-end;overflow:hidden;
+  background:var(--ink);color:#fff;
+}
+.hero-slides{position:absolute;inset:0}
+.hero-slide{
+  position:absolute;inset:0;opacity:0;transition:opacity 1.4s var(--ease);
+}
+.hero-slide.on{opacity:1}
+.hero-slide .fallback{
+  position:absolute;inset:0;
+  background:radial-gradient(120% 90% at 80% 10%,#3A4132,transparent 60%),
+             radial-gradient(100% 100% at 10% 90%,#2A2E26,transparent 55%),#17181A;
+}
+.hero-slide img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity 1s var(--ease);
+  transform:scale(1);
+}
+.hero-slide img.loaded{opacity:1}
+.hero-slide.on img.loaded{animation:kenburns 7s var(--ease) forwards}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.09)}}
+.hero-shade{
+  position:absolute;inset:0;z-index:2;
+  background:linear-gradient(180deg,rgba(16,17,18,.62) 0%,rgba(16,17,18,.28) 42%,rgba(16,17,18,.85) 100%);
+}
+.hero-inner{
+  position:relative;z-index:3;width:100%;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:70px 22px 88px;
+}
+.hero-eyebrow{
+  font-size:11.5px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;
+  color:rgba(255,255,255,.75);margin-bottom:14px;
+  opacity:0;animation:fadeUp .8s var(--ease) .08s forwards;
+}
+.hero-cap{
+  position:absolute;left:26px;bottom:24px;z-index:4;text-align:left;
+}
+.hero-cap b{display:block;font-size:12.5px;font-weight:600;color:#fff;letter-spacing:.02em}
+.hero-cap span{font-size:10.5px;color:rgba(255,255,255,.55);letter-spacing:.14em}
+@media(max-width:700px){.hero-cap{left:16px;bottom:18px}}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:600;letter-spacing:.02em;
+  background:rgba(255,255,255,.14);backdrop-filter:blur(10px);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);
+  border-radius:980px;padding:7px 14px;margin-bottom:18px;
+}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--signal);animation:blink 1.8s infinite}
+@keyframes blink{50%{opacity:.3}}
+.hero h1{
+  font-size:clamp(26px,3.6vw,40px);line-height:1.2;letter-spacing:.01em;
+  max-width:680px;font-weight:500;font-family:Georgia,serif;font-style:italic;
+  color:rgba(255,255,255,.95);
+}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line span{display:inline-block;transform:translateY(110%);animation:lineUp .9s var(--spring) .25s forwards}
+@keyframes lineUp{to{transform:none}}
+.hero p{
+  color:rgba(255,255,255,.72);font-size:clamp(14px,1.6vw,16px);
+  max-width:440px;margin:12px auto 26px;
+  opacity:0;animation:fadeUp .8s var(--ease) .45s forwards;
+}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp .8s var(--ease) .6s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero-stats{
+  display:flex;gap:34px;margin-top:36px;flex-wrap:wrap;justify-content:center;
+  opacity:0;animation:fadeUp .8s var(--ease) .75s forwards;
+}
+.hero-stat b{font-size:20px;font-weight:700;display:block;letter-spacing:-.02em}
+.hero-stat span{font-size:12px;color:rgba(255,255,255,.6)}
+.hero-dots{
+  position:absolute;right:26px;bottom:26px;z-index:4;display:flex;gap:8px;
+}
+.hero-dots button{
+  width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);
+  transition:all .3s var(--ease);
+}
+.hero-dots button.on{background:#fff;width:22px;border-radius:980px}
+.scroll-cue{
+  position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:4;
+  width:26px;height:40px;border-radius:14px;border:1.5px solid rgba(255,255,255,.4);
+  display:flex;justify-content:center;padding-top:7px;
+}
+.scroll-cue::after{
+  content:"";width:3px;height:8px;border-radius:2px;background:#fff;
+  animation:cue 1.8s var(--ease) infinite;
+}
+@keyframes cue{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(12px)}}
+@media(max-width:700px){.hero-dots{right:18px;bottom:70px}.scroll-cue{display:none}}
+
+/* ---------- marquee ticker ---------- */
+.marquee{
+  overflow:hidden;background:var(--ink);
+  padding:13px 0;white-space:nowrap;position:relative;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.marquee-track{display:inline-flex;gap:0;animation:marq 30s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marq{to{transform:translateX(-50%)}}
+.marquee span{
+  display:inline-flex;align-items:center;gap:20px;padding-right:20px;
+  font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.85);
+}
+.marquee span i{
+  width:5px;height:5px;border-radius:50%;background:var(--signal);font-style:normal;flex-shrink:0;
+}
+.marquee .hot{color:var(--signal)}
+
+/* ---------- section head ---------- */
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(24px,3.2vw,34px);line-height:1.1}
+.sec-head p{color:var(--ink-2);margin-top:6px;font-size:15px}
+
+/* ---------- product rail (new arrivals) ---------- */
+.rail-wrap{position:relative}
+.rail{
+  display:grid;grid-auto-flow:column;grid-auto-columns:min(258px,68vw);
+  gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:4px 4px 18px;scrollbar-width:none;
+}
+.rail::-webkit-scrollbar{display:none}
+.rail>*{scroll-snap-align:start}
+.rail-nav{display:flex;gap:8px}
+.rail-nav button{
+  width:36px;height:36px;border-radius:50%;background:var(--surface);
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+  transition:all .18s var(--ease);
+}
+.rail-nav button:hover{background:var(--ink);color:#fff}
+
+/* ---------- category grid ---------- */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:860px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
+.cat-card{
+  border-radius:var(--radius-l);overflow:hidden;background:var(--surface);
+  text-align:left;cursor:pointer;position:relative;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.cat-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-pop)}
+.cat-card .tile{aspect-ratio:4/3.1}
+.cat-card:hover .img-layer{transform:scale(1.05)}
+.cat-meta{position:absolute;left:18px;top:16px;z-index:3}
+.cat-meta b{font-size:16px;font-weight:700;display:block;letter-spacing:-.02em}
+.cat-meta span{font-size:12.5px;color:var(--ink-2)}
+.cat-card.has-photo .cat-meta b{color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+.cat-card.has-photo .cat-meta span{color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.35)}
+.cat-shade{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(20,20,22,.38),transparent 55%);opacity:0;transition:opacity .4s var(--ease)}
+.cat-card.has-photo .cat-shade{opacity:1}
+.cat-arrow{
+  position:absolute;right:14px;bottom:12px;z-index:3;width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.92);box-shadow:0 1px 4px rgba(29,29,31,.12);
+  display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--ink);
+  transition:all .25s var(--ease);
+}
+.cat-card:hover .cat-arrow{background:var(--ink);color:#fff;transform:translateX(2px)}
+
+/* ---------- tiles ---------- */
+.tile{
+  background:linear-gradient(180deg,#F7F7F9 0%,#EFEFF2 100%);
+  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.tile svg.garment{width:52%;height:auto;max-height:70%;filter:drop-shadow(0 10px 18px rgba(29,29,31,.14))}
+.badges{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:6px;z-index:4;align-items:flex-start}
+.badge{
+  font-size:11px;font-weight:600;padding:4px 10px;border-radius:980px;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(8px);
+  box-shadow:0 1px 4px rgba(29,29,31,.10);color:var(--ink);
+}
+.badge.tint{color:var(--tint-deep);background:rgba(238,240,235,.92)}
+.badge.signal{color:#fff;background:var(--signal)}
+
+/* ---------- promo duo ---------- */
+.promo-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:800px){.promo-duo{grid-template-columns:1fr}}
+.promo-card{
+  border-radius:var(--radius-l);padding:44px 36px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-height:340px;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.promo-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-pop)}
+.promo-dark{background:var(--ink);color:#fff}
+.promo-dark .muted{color:rgba(255,255,255,.65)}
+.promo-photo{background:var(--ink);color:#fff}
+.promo-photo .img-layer{opacity:0}
+.promo-photo .img-layer.loaded{opacity:.55}
+.promo-photo:hover .img-layer.loaded{transform:scale(1.04)}
+.promo-card h3{font-size:clamp(24px,3vw,32px);line-height:1.1;letter-spacing:-.03em;position:relative;z-index:2}
+.promo-card .price-big{color:var(--signal);font-weight:700}
+.promo-card p{font-size:14.5px;max-width:340px;position:relative;z-index:2}
+.promo-card .pill,.promo-card .eyebrow{position:relative;z-index:2}
+.promo-card .pill{margin-top:auto}
+.promo-art{position:absolute;right:-24px;bottom:-30px;width:210px;opacity:.14;pointer-events:none;z-index:1}
+.pulse-tag{
+  position:absolute;top:20px;right:20px;z-index:3;
+  display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;
+  background:rgba(255,255,255,.15);backdrop-filter:blur(8px);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.3);
+  border-radius:980px;padding:6px 12px;color:#fff;
+}
+.pulse-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--signal);animation:blink 1.8s infinite}
+
+/* ---------- social reels ---------- */
+.social-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:860px){.social-grid{grid-template-columns:repeat(2,1fr)}}
+.reel{
+  position:relative;aspect-ratio:9/15;border-radius:var(--radius-m);overflow:hidden;
+  box-shadow:var(--shadow-card);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+  display:flex;flex-direction:column;justify-content:flex-end;background:var(--ink);
+}
+.reel:hover{transform:translateY(-5px) scale(1.01);box-shadow:var(--shadow-pop)}
+.reel .tile{position:absolute;inset:0}
+.reel .img-layer.loaded{opacity:.9}
+.reel:hover .img-layer.loaded{transform:scale(1.05)}
+.reel .play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(29,29,31,.25);
+  transition:transform .25s var(--spring);
+}
+.reel .play::before{
+  content:"";position:absolute;inset:-7px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.55);
+  animation:pulse 2.2s var(--ease) infinite;
+}
+@keyframes pulse{0%{transform:scale(.8);opacity:0}45%{opacity:1}100%{transform:scale(1.25);opacity:0}}
+.reel:hover .play{transform:translate(-50%,-50%) scale(1.12)}
+.play::after{
+  content:"";border-style:solid;border-width:7px 0 7px 11px;
+  border-color:transparent transparent transparent var(--ink);margin-left:3px;
+}
+.reel figcaption{
+  position:relative;z-index:2;padding:14px;
+  background:linear-gradient(transparent,rgba(20,20,22,.72));color:#fff;
+}
+.reel figcaption b{font-size:13.5px;font-weight:600;display:block}
+.reel figcaption span{font-size:11.5px;opacity:.8}
+.follow-pill{
+  display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;
+  background:var(--surface);border-radius:980px;padding:8px 16px;color:var(--ink-2);
+}
+.follow-pill b{color:var(--ink)}
+
+/* ---------- stores ---------- */
+.store-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:800px){.store-grid{grid-template-columns:1fr}}
+.store-card{
+  border-radius:var(--radius-l);overflow:hidden;background:#fff;
+  box-shadow:var(--shadow-card);display:flex;flex-direction:column;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.store-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-pop)}
+.store-map{aspect-ratio:5/2;position:relative;background:var(--surface)}
+.store-map svg{position:absolute;inset:0;width:100%;height:100%}
+.store-body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:4px;flex:1}
+.store-body h3{font-size:19px;letter-spacing:-.02em}
+.store-body .addr{color:var(--ink-2);font-size:14px}
+.store-body .hrs{font-size:12.5px;color:var(--tint);font-weight:600;margin:4px 0 16px}
+.store-ctas{display:flex;gap:10px;margin-top:auto;flex-wrap:wrap}
+.store-ctas .pill{padding:10px 18px;font-size:13.5px}
+
+/* ---------- trust ---------- */
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:800px){.trust-grid{grid-template-columns:repeat(2,1fr)}}
+.trust-item{
+  background:var(--surface);border-radius:var(--radius-m);padding:20px;
+  display:flex;flex-direction:column;gap:8px;
+  transition:transform .25s var(--ease);
+}
+.trust-item:hover{transform:translateY(-3px)}
+.trust-item svg{width:24px;height:24px;stroke:var(--tint);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.trust-item b{font-size:14px;font-weight:600}
+.trust-item span{font-size:12.5px;color:var(--ink-2)}
+
+/* ---------- newsletter ---------- */
+.newsletter{text-align:center;background:var(--surface);border-radius:var(--radius-l);padding:56px 24px;margin:0 22px}
+@media(min-width:1164px){.newsletter{max-width:1076px;margin:0 auto}}
+.newsletter h2{font-size:clamp(24px,3.4vw,34px)}
+.newsletter p{color:var(--ink-2);margin:10px auto 24px;max-width:400px;font-size:14.5px}
+.reg-form{display:flex;max-width:420px;margin:0 auto;gap:8px}
+.reg-form input{
+  flex:1;background:#fff;border:1px solid var(--hairline);border-radius:980px;
+  padding:12px 18px;font-family:var(--font);font-size:14px;outline:none;
+  transition:border-color .18s var(--ease),box-shadow .18s var(--ease);
+}
+.reg-form input:focus{border-color:var(--tint);box-shadow:0 0 0 3px var(--tint-soft)}
+
+/* ---------- footer ---------- */
+footer{background:var(--surface);margin-top:64px;padding:48px 0 28px;border-top:1px solid var(--hairline)}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:32px;margin-bottom:36px}
+@media(max-width:860px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:540px){.foot-grid{grid-template-columns:1fr}}
+.foot-brand p{color:var(--ink-2);font-size:13px;margin-top:12px;max-width:280px}
+footer h4{font-size:12px;font-weight:600;color:var(--ink-2);margin-bottom:12px;letter-spacing:.02em;text-transform:uppercase}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+footer ul a,footer ul button{color:var(--ink);font-size:13.5px;text-align:left}
+footer ul a:hover,footer ul button:hover{color:var(--tint)}
+.foot-base{
+  border-top:1px solid var(--hairline);padding-top:18px;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-size:12px;color:var(--ink-2);
+}
+
+/* ---------- shop ---------- */
+.page-head{padding:44px 0 6px}
+.page-head h1{font-size:clamp(30px,4.4vw,46px);letter-spacing:-.03em}
+.page-head .crumb{font-size:13px;color:var(--ink-2);margin-bottom:10px;display:inline-block}
+.page-head .crumb:hover{color:var(--ink)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:20px 0 24px;flex-wrap:wrap}
+.seg{display:inline-flex;background:var(--surface);border-radius:980px;padding:3px;gap:2px;overflow-x:auto;max-width:100%}
+.seg button{
+  font-size:13px;font-weight:600;color:var(--ink-2);
+  padding:8px 16px;border-radius:980px;white-space:nowrap;
+  transition:all .2s var(--ease);
+}
+.seg button:hover{color:var(--ink)}
+.seg button.active{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(29,29,31,.12)}
+.sort select{
+  font-family:var(--font-disp);font-size:13px;font-weight:600;color:var(--ink);
+  background:var(--surface);border:none;border-radius:980px;padding:9px 14px;outline:none;
+  -webkit-appearance:none;appearance:none;
+}
+.count-note{font-size:12.5px;color:var(--ink-2);padding-bottom:18px}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-bottom:64px}
+@media(max-width:1000px){.prod-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){.prod-grid{grid-template-columns:repeat(2,1fr);gap:12px}}
+
+/* product card w/ hover image swap */
+.prod-card{
+  border-radius:var(--radius-m);overflow:hidden;background:#fff;text-align:left;cursor:pointer;
+  box-shadow:var(--shadow-card);display:flex;flex-direction:column;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.prod-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-pop)}
+.prod-media{position:relative;overflow:hidden}
+.prod-media .tile{aspect-ratio:1/1.14}
+.prod-media .img-a.loaded{opacity:1}
+.prod-media .img-b{z-index:2}
+.prod-card:hover .img-a.loaded{transform:scale(1.05)}
+.prod-card:hover .img-b.loaded{opacity:1;transform:scale(1.03)}
+.prod-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.prod-body b{font-size:14px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.size-row{font-size:11.5px;color:var(--ink-3);letter-spacing:.06em}
+.prod-price-row{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.price{font-size:14.5px;font-weight:700}
+.bnpl{font-size:11px;color:var(--ink-2);margin-top:2px}
+.bnpl b{color:var(--tint);font-weight:600}
+.quick-add{
+  width:30px;height:30px;border-radius:50%;background:var(--surface);
+  font-size:17px;line-height:1;display:flex;align-items:center;justify-content:center;
+  transition:all .18s var(--ease);color:var(--ink);
+}
+.quick-add:hover{background:var(--ink);color:#fff}
+
+/* ---------- PDP ---------- */
+.pdp{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;padding:30px 0 72px}
+@media(max-width:900px){.pdp{grid-template-columns:1fr;gap:24px}}
+.pdp-main{
+  position:relative;aspect-ratio:1/1.08;border-radius:var(--radius-l);overflow:hidden;
+  box-shadow:var(--shadow-card);
+}
+.pdp-main .tile{position:absolute;inset:0}
+.pdp-main .img-layer.loaded{opacity:1}
+.pdp-thumbs{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.pdp-thumbs button{
+  width:58px;height:58px;border-radius:14px;position:relative;overflow:hidden;
+  box-shadow:inset 0 0 0 1px var(--hairline);background:var(--surface);
+  transition:box-shadow .18s var(--ease),transform .18s var(--ease);
+}
+.pdp-thumbs button:hover{transform:scale(1.06)}
+.pdp-thumbs button.active{box-shadow:0 0 0 2px var(--ink)}
+.pdp-thumbs .fill{position:absolute;inset:0}
+.pdp-thumbs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pdp-thumbs .tlabel{
+  position:absolute;left:0;right:0;bottom:0;font-size:8px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:#fff;background:rgba(20,20,22,.45);padding:2px 0;text-align:center;
+}
+.pdp-info h1{font-size:clamp(26px,3.4vw,38px);line-height:1.06}
+.pdp-kicker{font-size:13px;color:var(--ink-2);margin-bottom:6px;display:block}
+.pdp-price{display:flex;align-items:center;gap:12px;margin:12px 0 2px;flex-wrap:wrap}
+.pdp-price .price{font-size:22px}
+.offer-chip{font-size:12px;font-weight:600;color:#B4531A;background:var(--signal-soft);padding:5px 12px;border-radius:980px}
+.pdp-bnpl{font-size:12.5px;color:var(--ink-2);margin-bottom:14px}
+.pdp-desc{color:var(--ink-2);font-size:15px;margin:8px 0 4px;max-width:440px}
+.pdp-details{margin:12px 0 4px;max-width:440px;display:flex;flex-direction:column;gap:6px}
+.pdp-details li{
+  list-style:none;font-size:13.5px;color:var(--ink-2);display:flex;gap:9px;align-items:baseline;
+}
+.pdp-details li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--tint);flex-shrink:0;translate:0 -2px}
+.fit-note{
+  font-size:12.5px;color:var(--ink-2);background:var(--surface);
+  border-radius:980px;padding:7px 14px;display:inline-flex;gap:6px;margin-top:10px;
+}
+.opt-label{
+  font-size:13px;font-weight:600;display:flex;justify-content:space-between;align-items:center;
+  margin:18px 0 10px;max-width:440px;
+}
+.opt-label .link{font-size:12.5px;color:var(--tint);font-weight:600}
+.opt-label .link:hover{text-decoration:underline}
+.swatches{display:flex;gap:10px}
+.swatch{
+  width:32px;height:32px;border-radius:50%;position:relative;
+  box-shadow:inset 0 0 0 1px rgba(29,29,31,.12);
+  transition:transform .18s var(--ease);
+}
+.swatch:hover{transform:scale(1.12)}
+.swatch.active{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--ink)}
+.sizes{display:flex;gap:8px;flex-wrap:wrap;max-width:440px}
+.size-btn{
+  min-width:46px;padding:10px 12px;border-radius:12px;background:var(--surface);
+  font-size:13.5px;font-weight:600;color:var(--ink);
+  transition:all .18s var(--ease);
+}
+.size-btn:hover{background:var(--surface-2)}
+.size-btn.active{background:var(--ink);color:#fff}
+.size-chart{display:none;margin:14px 0 4px;border-radius:var(--radius-s);overflow:hidden;background:var(--surface);max-width:440px}
+.size-chart.open{display:block;animation:pageIn .25s var(--ease)}
+.size-chart table{width:100%;border-collapse:collapse;font-size:12.5px}
+.size-chart th{font-size:11px;font-weight:600;color:var(--ink-2);padding:10px 8px;text-align:center;border-bottom:1px solid var(--hairline)}
+.size-chart td{padding:9px 8px;text-align:center;border-bottom:1px solid rgba(29,29,31,.05)}
+.size-chart tr:last-child td{border-bottom:none}
+.size-chart .chart-note{font-size:11px;color:var(--ink-3);padding:9px 12px}
+.pdp-ctas{display:flex;flex-direction:column;gap:10px;margin-top:22px;max-width:440px}
+.spec-list{margin-top:24px;max-width:440px;background:var(--surface);border-radius:var(--radius-s);overflow:hidden}
+.spec-row{display:grid;grid-template-columns:110px 1fr;font-size:13.5px;border-bottom:1px solid rgba(29,29,31,.05)}
+.spec-row:last-child{border-bottom:none}
+.spec-row dt{padding:11px 14px;color:var(--ink-2);font-weight:500}
+.spec-row dd{padding:11px 14px 11px 0}
+.related{padding-bottom:72px}
+
+/* ---------- buy bar ---------- */
+.buybar{
+  display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;
+  background:rgba(255,255,255,.8);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-top:1px solid var(--hairline);
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  grid-template-columns:auto 1fr auto;gap:10px;align-items:center;
+}
+.buybar .price{font-size:15px}
+.buybar .pill{padding:11px 16px;font-size:13.5px}
+@media(max-width:900px){.buybar.show{display:grid}}
+
+/* ---------- visit ---------- */
+.contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;padding-bottom:72px}
+@media(max-width:860px){.contact-grid{grid-template-columns:1fr}}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12.5px;font-weight:600;margin-bottom:6px;color:var(--ink-2)}
+.field input,.field textarea{
+  width:100%;background:var(--surface);border:1px solid transparent;border-radius:var(--radius-s);
+  padding:12px 14px;font-family:var(--font);font-size:14px;color:var(--ink);outline:none;
+  transition:border-color .18s var(--ease),background .18s var(--ease),box-shadow .18s var(--ease);
+}
+.field input:focus,.field textarea:focus{background:#fff;border-color:var(--tint);box-shadow:0 0 0 3px var(--tint-soft)}
+.field textarea{min-height:110px;resize:vertical}
+.hint{font-size:11.5px;color:var(--ink-3);margin-top:5px}
+
+/* ---------- track order ---------- */
+.track-layout{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;padding-bottom:72px;align-items:start}
+@media(max-width:860px){.track-layout{grid-template-columns:1fr}}
+.track-card{background:#fff;border-radius:var(--radius-l);box-shadow:var(--shadow-card);padding:26px}
+.track-form{display:flex;flex-direction:column;gap:12px}
+.timeline{margin-top:8px;display:none}
+.timeline.show{display:block;animation:pageIn .35s var(--ease)}
+.t-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.t-head b{font-size:15px}
+.status-pill{font-size:12px;font-weight:600;color:#B4531A;background:var(--signal-soft);border-radius:980px;padding:5px 12px}
+.t-step{display:grid;grid-template-columns:26px 1fr;gap:14px;position:relative;padding-bottom:24px}
+.t-step::before{content:"";position:absolute;left:12px;top:28px;bottom:2px;width:2px;background:var(--surface-2);border-radius:2px}
+.t-step:last-child{padding-bottom:0}
+.t-step:last-child::before{display:none}
+.t-dot{
+  width:26px;height:26px;border-radius:50%;background:var(--surface-2);
+  display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;
+  transition:background .3s var(--ease);
+}
+.t-step.done .t-dot{background:var(--tint)}
+.t-step.done::before{background:var(--tint)}
+.t-step.now .t-dot{background:var(--signal);box-shadow:0 0 0 5px var(--signal-soft)}
+.t-step.now .t-dot::after{content:"";width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 1.6s infinite}
+.t-step b{font-size:14px;display:block}
+.t-step span{font-size:12.5px;color:var(--ink-2)}
+.t-step.todo b{color:var(--ink-3)}
+.track-aside{display:flex;flex-direction:column;gap:10px}
+
+/* ---------- returns / accordion ---------- */
+.fact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0 40px}
+@media(max-width:760px){.fact-grid{grid-template-columns:1fr}}
+.fact-card{background:var(--surface);border-radius:var(--radius-m);padding:22px;display:flex;flex-direction:column;gap:6px}
+.fact-card b{font-size:22px;letter-spacing:-.02em}
+.fact-card span{font-size:13px;color:var(--ink-2)}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:44px}
+@media(max-width:760px){.how-steps{grid-template-columns:1fr}}
+.how-step{border:1px solid var(--hairline);border-radius:var(--radius-m);padding:20px;position:relative}
+.how-step i{
+  font-style:normal;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:10px;
+}
+.how-step b{font-size:14.5px;display:block;margin-bottom:4px}
+.how-step span{font-size:13px;color:var(--ink-2)}
+.acc{max-width:760px;display:flex;flex-direction:column;gap:10px;padding-bottom:24px}
+.acc-item{background:var(--surface);border-radius:var(--radius-m);overflow:hidden}
+.acc-head{
+  width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:16px 18px;font-weight:600;font-size:14.5px;text-align:left;
+}
+.acc-head .chev{transition:transform .28s var(--ease);color:var(--ink-2);font-size:12px;flex-shrink:0}
+.acc-item.open .chev{transform:rotate(180deg)}
+.acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s var(--ease)}
+.acc-item.open .acc-body{grid-template-rows:1fr}
+.acc-body>div{overflow:hidden}
+.acc-body p{padding:0 18px 16px;font-size:13.5px;color:var(--ink-2)}
+.draft-note{
+  font-size:12px;color:var(--ink-3);background:var(--surface);border-radius:var(--radius-s);
+  padding:10px 14px;max-width:760px;margin-bottom:40px;
+}
+
+/* ---------- cart sheet ---------- */
+.scrim{
+  position:fixed;inset:0;background:rgba(29,29,31,.4);z-index:90;
+  opacity:0;pointer-events:none;transition:opacity .25s var(--ease);
+  backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
+}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:10px;right:10px;bottom:10px;width:min(400px,calc(100vw - 20px));z-index:95;
+  background:#fff;border-radius:var(--radius-l);box-shadow:var(--shadow-pop);
+  transform:translateX(calc(100% + 20px));transition:transform .34s var(--spring);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.drawer.on{transform:none}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--hairline)}
+.drawer-head b{font-size:17px;font-weight:700}
+.drawer-close{
+  width:30px;height:30px;border-radius:50%;background:var(--surface);
+  font-size:16px;display:flex;align-items:center;justify-content:center;
+  transition:background .18s var(--ease);
+}
+.drawer-close:hover{background:var(--surface-2)}
+.drawer-items{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px}
+.cart-empty{margin:auto;text-align:center;color:var(--ink-2);font-size:14px}
+.cart-empty b{display:block;font-size:16px;color:var(--ink);margin-bottom:4px}
+.ci{display:grid;grid-template-columns:62px 1fr auto;gap:12px;background:var(--surface);border-radius:var(--radius-s);padding:10px}
+.ci .tile{width:62px;height:70px;border-radius:10px}
+.ci b{font-size:13px;font-weight:600;display:block}
+.ci .sub{font-size:11.5px;color:var(--ink-2);margin-top:1px}
+.qty{display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:#fff;border-radius:980px;padding:2px}
+.qty button{width:24px;height:24px;border-radius:50%;font-size:14px;transition:background .15s var(--ease)}
+.qty button:hover{background:var(--surface-2)}
+.qty span{font-size:12.5px;font-weight:600;min-width:14px;text-align:center}
+.ci-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between}
+.ci-remove{font-size:11px;color:var(--ink-3)}
+.ci-remove:hover{color:var(--signal)}
+.drawer-foot{border-top:1px solid var(--hairline);padding:16px 20px;display:flex;flex-direction:column;gap:10px}
+.offer-applied{
+  display:none;justify-content:space-between;align-items:center;
+  font-size:12.5px;font-weight:600;color:#B4531A;
+  background:var(--signal-soft);border-radius:var(--radius-s);padding:9px 12px;
+}
+.offer-applied.show{display:flex;animation:pageIn .3s var(--ease)}
+.subtotal{display:flex;justify-content:space-between;font-size:16px;font-weight:700}
+.drawer-note{font-size:11.5px;color:var(--ink-3);text-align:center}
+
+/* ---------- instant search (spotlight) ---------- */
+.icon-btn{
+  width:36px;height:36px;border-radius:50%;background:var(--surface);
+  display:flex;align-items:center;justify-content:center;position:relative;
+  transition:background .18s var(--ease),transform .18s var(--ease);flex-shrink:0;
+}
+.icon-btn:hover{background:var(--surface-2)}
+.icon-btn:active{transform:scale(.94)}
+.icon-btn svg{width:17px;height:17px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.icon-btn .mini-count{
+  position:absolute;top:-2px;right:-2px;min-width:16px;height:16px;border-radius:980px;
+  background:var(--tint);color:#fff;font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;padding:0 4px;
+}
+.icon-btn .mini-count.hide{display:none}
+.search-scrim{
+  position:fixed;inset:0;z-index:110;background:rgba(29,29,31,.45);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  opacity:0;pointer-events:none;transition:opacity .22s var(--ease);
+  display:flex;justify-content:center;align-items:flex-start;padding:12vh 18px 0;
+}
+.search-scrim.on{opacity:1;pointer-events:auto}
+.search-panel{
+  width:min(620px,100%);background:#fff;border-radius:20px;box-shadow:var(--shadow-pop);
+  overflow:hidden;transform:translateY(-14px) scale(.98);transition:transform .26s var(--spring);
+}
+.search-scrim.on .search-panel{transform:none}
+.search-bar{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--hairline)}
+.search-bar svg{width:18px;height:18px;stroke:var(--ink-2);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+.search-bar input{
+  flex:1;border:none;outline:none;font-family:var(--font);font-size:17px;color:var(--ink);
+  background:transparent;
+}
+.search-bar input::placeholder{color:var(--ink-3)}
+.search-esc{
+  font-size:10.5px;font-weight:600;color:var(--ink-2);background:var(--surface);
+  border-radius:6px;padding:4px 7px;flex-shrink:0;
+}
+.search-body{max-height:52vh;overflow-y:auto;padding:10px}
+.s-row{
+  display:grid;grid-template-columns:46px 1fr auto;gap:13px;align-items:center;
+  width:100%;text-align:left;padding:9px 10px;border-radius:14px;
+  transition:background .15s var(--ease);
+}
+.s-row:hover,.s-row.hot{background:var(--surface)}
+.s-row .tile{width:46px;height:52px;border-radius:10px}
+.s-row b{font-size:14px;font-weight:600;display:block}
+.s-row span{font-size:12px;color:var(--ink-2)}
+.s-row .price{font-size:13.5px}
+.s-empty{padding:22px 14px 14px;text-align:center}
+.s-empty p{font-size:13.5px;color:var(--ink-2);margin-bottom:14px}
+.s-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding-bottom:10px}
+.s-chips button{
+  font-size:12.5px;font-weight:600;background:var(--surface);border-radius:980px;padding:8px 15px;
+  transition:all .15s var(--ease);
+}
+.s-chips button:hover{background:var(--ink);color:#fff}
+.search-foot{
+  padding:10px 20px;border-top:1px solid var(--hairline);font-size:11px;color:var(--ink-3);
+  display:flex;justify-content:space-between;
+}
+
+/* ---------- wishlist hearts ---------- */
+.heart-btn{
+  position:absolute;top:12px;right:12px;z-index:4;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.9);backdrop-filter:blur(8px);
+  box-shadow:0 1px 4px rgba(29,29,31,.12);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s var(--spring),background .18s var(--ease);
+}
+.heart-btn:hover{transform:scale(1.12)}
+.heart-btn svg{width:15px;height:15px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:all .18s var(--ease)}
+.heart-btn.saved svg{fill:#E0482E;stroke:#E0482E}
+.heart-btn.pop{animation:heartPop .35s var(--spring)}
+@keyframes heartPop{45%{transform:scale(1.3)}}
+.heart-lg{position:static;width:48px;height:48px;border-radius:980px;background:var(--surface);box-shadow:none;flex-shrink:0}
+.heart-lg:hover{background:var(--surface-2)}
+.heart-lg svg{width:19px;height:19px}
+
+/* ---------- ratings & reviews ---------- */
+.stars-line{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--ink-2);margin-top:1px}
+.stars-line .star{color:#F5A623;font-size:12px}
+.stars-line b{color:var(--ink);font-weight:600}
+.pdp-stars{display:flex;align-items:center;gap:8px;margin:6px 0 0;font-size:13.5px}
+.pdp-stars .glyphs{color:#F5A623;letter-spacing:2px;font-size:14px}
+.pdp-stars b{font-weight:700}
+.pdp-stars button{color:var(--tint);font-weight:600;font-size:13px}
+.pdp-stars button:hover{text-decoration:underline}
+.reviews{max-width:440px;margin-top:26px}
+.reviews-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+.reviews-head h3{font-size:18px}
+.reviews-head button{font-size:13px;color:var(--tint);font-weight:600}
+.rev-card{background:var(--surface);border-radius:var(--radius-m);padding:16px 18px;margin-bottom:10px}
+.rev-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rev-ava{
+  width:32px;height:32px;border-radius:50%;background:var(--tint);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;
+}
+.rev-top b{font-size:13.5px;display:block}
+.rev-top .sub{font-size:11px;color:var(--ink-2)}
+.rev-top .glyphs{margin-left:auto;color:#F5A623;font-size:12px;letter-spacing:1px}
+.rev-card p{font-size:13.5px;color:var(--ink-2)}
+.verified{
+  display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;color:var(--tint);
+}
+.verified::before{content:"✓";font-size:10px}
+
+/* ---------- stock urgency ---------- */
+.badge.low{color:#B4531A;background:var(--signal-soft)}
+.size-btn{position:relative}
+.size-btn .low-dot{
+  position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--signal);
+}
+.low-note{
+  display:flex;align-items:center;gap:7px;margin-top:10px;
+  font-size:12.5px;font-weight:600;color:#B4531A;
+}
+.low-note::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--signal);animation:blink 1.6s infinite;flex-shrink:0}
+
+/* ---------- cart: free delivery bar & pay badges ---------- */
+.ship-bar{padding:14px 20px 4px}
+.ship-bar .msg{font-size:12.5px;color:var(--ink-2);margin-bottom:8px}
+.ship-bar .msg b{color:var(--ink)}
+.ship-bar .msg.done{color:var(--tint);font-weight:600}
+.ship-track{height:6px;border-radius:980px;background:var(--surface-2);overflow:hidden}
+.ship-fill{
+  height:100%;width:0;border-radius:980px;background:linear-gradient(90deg,var(--tint),#6B7A5C);
+  transition:width .5s var(--ease);
+}
+.ship-fill.done{background:linear-gradient(90deg,var(--tint),#8AA06F)}
+.pay-badges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding-top:2px}
+.pay-badges span{
+  font-size:9.5px;font-weight:700;letter-spacing:.03em;color:var(--ink-2);
+  border:1px solid var(--hairline);border-radius:6px;padding:4px 8px;
+}
+
+/* ---------- toast / ribbon ---------- */
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);z-index:120;
+  background:rgba(29,29,31,.92);color:#fff;padding:12px 22px;border-radius:980px;
+  font-size:13.5px;font-weight:500;opacity:0;pointer-events:none;
+  transition:all .3s var(--spring);
+  backdrop-filter:blur(8px);box-shadow:var(--shadow-pop);
+  max-width:90vw;text-align:center;
+}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.proto-tag{
+  position:fixed;left:12px;bottom:12px;z-index:60;
+  font-size:10px;font-weight:600;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(8px);color:var(--ink-2);
+  padding:6px 12px;border-radius:980px;box-shadow:var(--shadow-card);pointer-events:none;
+}
+@media(max-width:900px){.proto-tag{display:none}}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .rv,.rv-stagger>*,.hero p,.hero-ctas,.hero-stats{opacity:1!important;transform:none!important}
+  .hero h1 .line span{transform:none!important}
+}
+</style>
+</head>
+<body>
+<!-- SVG garment library (fallback art) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="g-tee" viewBox="0 0 100 100">
+      <path d="M35 18 L20 26 L10 44 L22 50 L26 42 L26 86 L74 86 L74 42 L78 50 L90 44 L80 26 L65 18 C62 26 56 30 50 30 C44 30 38 26 35 18 Z" fill="currentColor" opacity=".92"/>
+      <path d="M42 20 C45 25 55 25 58 20" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.6"/>
+    </symbol>
+    <symbol id="g-pants" viewBox="0 0 100 100">
+      <path d="M32 12 L68 12 L72 40 L74 88 L58 88 L52 46 L48 46 L42 88 L26 88 L28 40 Z" fill="currentColor" opacity=".92"/>
+      <path d="M33 22 L67 22" stroke="rgba(255,255,255,.4)" stroke-width="1.6"/>
+    </symbol>
+    <symbol id="g-shirt" viewBox="0 0 100 100">
+      <path d="M36 16 L22 24 L14 46 L24 50 L28 44 L28 88 L72 88 L72 44 L76 50 L86 46 L78 24 L64 16 L58 24 L50 30 L42 24 Z" fill="currentColor" opacity=".92"/>
+      <path d="M42 16 L50 30 L58 16" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.6"/>
+      <path d="M50 34 L50 84" stroke="rgba(255,255,255,.35)" stroke-width="1.2" stroke-dasharray="1 4"/>
+    </symbol>
+    <symbol id="g-jacket" viewBox="0 0 100 100">
+      <path d="M34 14 L20 22 L14 50 L26 54 L28 46 L28 88 L46 88 L46 34 L54 34 L54 88 L72 88 L72 46 L74 54 L86 50 L80 22 L66 14 L58 22 L50 28 L42 22 Z" fill="currentColor" opacity=".92"/>
+      <path d="M28 62 L38 62 M62 62 L72 62" stroke="rgba(255,255,255,.4)" stroke-width="1.8"/>
+    </symbol>
+    <symbol id="g-polo" viewBox="0 0 100 100">
+      <path d="M35 18 L20 26 L10 44 L22 50 L26 42 L26 86 L74 86 L74 42 L78 50 L90 44 L80 26 L65 18 L58 26 L50 32 L42 26 Z" fill="currentColor" opacity=".92"/>
+      <path d="M43 19 L50 32 L57 19" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.6"/>
+    </symbol>
+  </defs>
+</svg>
+<a class="offer-strip" href="#" onclick="goShop('pants');return false">
+  Any 2 pants for <b>Rs 5,000</b> · Island-wide delivery<span class="cta">Shop the offer →</span>
+</a>
+
+<header>
+  <div class="nav-wrap">
+    <nav class="nav-links" aria-label="Main">
+      <button id="nl-home" onclick="go('home')" class="active">Home</button>
+      <button id="nl-shop" onclick="goShop('all')">Shop</button>
+      <button onclick="goShop('pants')" class="nav-offer">2 for 5,000</button>
+      <button id="nl-visit" onclick="go('visit')">Stores</button>
+    </nav>
+    <a class="brand" href="#" onclick="go('home');return false" aria-label="Barracks Clothing home">
+      <svg class="brand-box" viewBox="0 0 300 300" aria-hidden="true">
+        <rect x="24" y="18" width="252" height="264" fill="none" stroke="currentColor" stroke-width="15"/>
+        <text x="150" y="235" font-family="Georgia,serif" font-style="italic" font-size="240" fill="currentColor" text-anchor="middle">B</text>
+      </svg>
+      <span class="wordmark">Barracks<small>Clothing</small></span>
+    </a>
+    <div class="nav-ctrls">
+      <button class="icon-btn" onclick="openSearch()" aria-label="Search" title="Search ( / )">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>
+      </button>
+      <button class="icon-btn" onclick="goShop('saved')" aria-label="Saved items">
+        <svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.7-9.5-9A5.4 5.4 0 0 1 12 6.6a5.4 5.4 0 0 1 9.5 4.9c-2 4.3-9.5 9-9.5 9z"/></svg>
+        <span class="mini-count hide" id="wlCount">0</span>
+      </button>
+      <button class="cart-btn" onclick="openCart()" aria-label="Open bag">
+        Bag <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- instant search overlay -->
+<div class="search-scrim" id="searchScrim" onclick="if(event.target===this)closeSearch()">
+  <div class="search-panel" role="dialog" aria-label="Search products">
+    <div class="search-bar">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>
+      <input id="searchInput" placeholder="Search products, fabrics, colours…" autocomplete="off"
+        oninput="searchRender()" aria-label="Search">
+      <span class="search-esc">esc</span>
+    </div>
+    <div class="search-body" id="searchBody"></div>
+    <div class="search-foot"><span>↵ opens top result</span><span>Barracks instant search</span></div>
+  </div>
+</div>
+
+<main>
+<!-- ═══════ HOME ═══════ -->
+<div class="page on" id="page-home">
+
+  <!-- CINEMATIC HERO — auto-playing campaign slideshow (video slot in production) -->
+  <section class="hero" style="padding:0">
+    <div class="hero-slides" id="heroSlides"></div>
+    <div class="hero-shade"></div>
+    <div class="hero-inner shell">
+      <span class="hero-eyebrow">New collection — Standard Issue SS26</span>
+      <h1><span class="line"><span>Always different. That's the standard.</span></span></h1>
+      <p>Linen, chinos, oversize tees and party shirts — Kohuwala &amp; Dehiwala, delivered island-wide.</p>
+      <div class="hero-ctas">
+        <button class="pill pill-white" onclick="goShop('all')">Shop now</button>
+        <a class="pill pill-frost" href="https://www.tiktok.com/@barracksclothing" target="_blank" rel="noopener">▶&nbsp; Watch the drops · <b id="statTk">0</b></a>
+      </div>
+    </div>
+    <div class="hero-cap" aria-hidden="true"><b id="heroCapT"></b><span id="heroCapI"></span></div>
+    <div class="hero-dots" id="heroDots"></div>
+    <div class="scroll-cue" aria-hidden="true"></div>
+  </section>
+
+  <!-- ticker -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqTrack"></div>
+  </div>
+
+  <!-- new arrivals rail -->
+  <section>
+    <div class="shell">
+      <div class="sec-head rv">
+        <div><h2>New this week</h2><p>Fresh from the racks — straight off the TikTok drops.</p></div>
+        <div class="rail-nav">
+          <button onclick="railScroll(-1)" aria-label="Scroll back">←</button>
+          <button onclick="railScroll(1)" aria-label="Scroll forward">→</button>
+        </div>
+      </div>
+      <div class="rail-wrap"><div class="rail" id="newRail"></div></div>
+    </div>
+  </section>
+
+  <!-- categories -->
+  <section style="padding-top:8px">
+    <div class="shell">
+      <div class="sec-head rv">
+        <div><h2>Shop by category</h2><p>Everything in store, online.</p></div>
+        <button class="tlink" onclick="goShop('all')">View all →</button>
+      </div>
+      <div class="cat-grid rv-stagger" id="catGrid"></div>
+    </div>
+  </section>
+
+  <!-- promo duo -->
+  <section style="padding-top:0">
+    <div class="shell promo-duo rv-stagger">
+      <div class="promo-card promo-dark">
+        <span class="eyebrow" style="color:var(--signal)">Limited offer</span>
+        <h3>Any 2 pants.<br><span class="price-big">Rs 5,000 flat.</span></h3>
+        <p class="muted">Mix golf chinos, linen and big-fold baggies. The discount applies itself in your bag — no codes.</p>
+        <button class="pill pill-signal" onclick="goShop('pants')">Build your pair</button>
+        <svg class="promo-art" viewBox="0 0 100 100" style="color:#fff"><use href="#g-pants"/></svg>
+      </div>
+      <div class="promo-card promo-photo">
+        <img class="img-layer" alt="" loading="lazy"
+          src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1400&auto=format&fit=crop"
+          onload="this.classList.add('loaded')" onerror="this.classList.add('gone')">
+        <span class="pulse-tag"><span class="dot"></span>Open now · 10:30–20:30</span>
+        <span class="eyebrow" style="color:#fff">Two stores, seven days</span>
+        <h3>Try it on in<br>Kohuwala or Dehiwala.</h3>
+        <p class="muted">Or skip the trip — order on WhatsApp and it ships anywhere on the island.</p>
+        <button class="pill pill-white" onclick="go('visit')">Find a store</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- social -->
+  <section style="padding-top:0">
+    <div class="shell">
+      <div class="sec-head rv">
+        <div><h2>New on @barracksclothing</h2><p>Fresh fits, drops and offers — posted daily.</p></div>
+        <a class="follow-pill" href="https://www.tiktok.com/@barracksclothing" target="_blank" rel="noopener"><b>227.8K</b> on TikTok · Follow →</a>
+      </div>
+      <div class="social-grid rv-stagger" id="reelGrid"></div>
+    </div>
+  </section>
+
+  <!-- stores -->
+  <section style="padding-top:0">
+    <div class="shell">
+      <div class="sec-head rv"><div><h2>Visit the stores</h2><p>Dutugemunu Street and Nikape Road — same standard, both sides of the flyover.</p></div></div>
+      <div class="store-grid rv-stagger" id="storeGridHome"></div>
+    </div>
+  </section>
+
+  <!-- trust -->
+  <section style="padding-top:0">
+    <div class="shell trust-grid rv-stagger">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
+        <b>Island-wide delivery</b><span>2–4 working days, trackable</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg>
+        <b>Flexible payments</b><span>Visa · Master · AMEX · Koko · MintPay</span>
+      </div>
+      <div class="trust-item" style="cursor:pointer" onclick="go('returns')" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 1 2.3 5.6M4 12V7m0 5h5"/></svg>
+        <b>Easy exchanges</b><span>Wrong size? We'll sort it fast →</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5z"/></svg>
+        <b>Order on WhatsApp</b><span>DM us — fastest way to buy</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- newsletter -->
+  <section style="padding-top:0">
+    <div class="newsletter rv">
+      <h2>Stay in the loop</h2>
+      <p>New drops and offers, straight to your inbox. No spam — that's the standard.</p>
+      <form class="reg-form" onsubmit="regSubmit(event)">
+        <input type="email" required placeholder="Email address" aria-label="Email address">
+        <button class="pill pill-dark" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══════ SHOP ═══════ -->
+<div class="page" id="page-shop">
+  <div class="shell">
+    <div class="page-head">
+      <button class="crumb" onclick="go('home')">← Home</button>
+      <h1>All products</h1>
+    </div>
+    <div class="toolbar">
+      <div class="seg" id="chips" role="tablist"></div>
+      <div class="sort">
+        <select id="sortSel" onchange="renderShop()" aria-label="Sort products">
+          <option value="feat">Featured</option>
+          <option value="lo">Price: Low to High</option>
+          <option value="hi">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+    <div class="count-note" id="countNote"></div>
+    <div class="prod-grid" id="prodGrid"></div>
+  </div>
+</div>
+
+<!-- ═══════ PRODUCT ═══════ -->
+<div class="page" id="page-product">
+  <div class="shell">
+    <div class="page-head" style="padding-bottom:0">
+      <button class="crumb" id="pdpCrumb" onclick="goShop('all')">← All products</button>
+    </div>
+    <div class="pdp" id="pdpWrap"></div>
+    <div class="related">
+      <div class="sec-head"><div><h2>You might also like</h2></div></div>
+      <div class="prod-grid" id="relatedGrid" style="padding-bottom:0"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ VISIT ═══════ -->
+<div class="page" id="page-visit">
+  <div class="shell">
+    <div class="page-head">
+      <button class="crumb" onclick="go('home')">← Home</button>
+      <h1>Stores &amp; contact</h1>
+      <p class="muted" style="max-width:520px;margin-top:12px">
+        Barracks started on Dutugemunu Street and never left the neighbourhood.
+        Walk in and try everything, or order over WhatsApp and we'll ship it island-wide.
+      </p>
+    </div>
+    <section style="padding:26px 0 36px">
+      <div class="store-grid" id="storeGridVisit"></div>
+    </section>
+    <div class="contact-grid">
+      <div>
+        <h2 style="font-size:24px;margin-bottom:18px">Send us a message</h2>
+        <form onsubmit="contactSubmit(event)">
+          <div class="field"><label for="cf-name">Name</label><input id="cf-name" required placeholder="Your name"></div>
+          <div class="field">
+            <label for="cf-phone">Phone</label>
+            <input id="cf-phone" type="tel" placeholder="07X XXX XXXX">
+            <div class="hint">We'll reply on WhatsApp if you prefer.</div>
+          </div>
+          <div class="field"><label for="cf-msg">Message</label><textarea id="cf-msg" required placeholder="Sizes, stock, delivery — ask anything."></textarea></div>
+          <button class="pill pill-dark" type="submit">Send message</button>
+        </form>
+      </div>
+      <div>
+        <h2 style="font-size:24px;margin-bottom:18px">Faster routes</h2>
+        <div style="display:flex;flex-direction:column;gap:10px;max-width:320px">
+          <a class="pill pill-tint pill-block" href="https://wa.me/94770657669?text=Hi%20Barracks!%20I%20have%20a%20question." target="_blank" rel="noopener">WhatsApp · 077 065 7669</a>
+          <a class="pill pill-gray pill-block" href="tel:+94770657669">Call the store</a>
+          <a class="pill pill-gray pill-block" href="https://www.instagram.com/barracksclothing/" target="_blank" rel="noopener">DM on Instagram</a>
+          <p class="hint" style="text-align:center">Open 10:30–20:30, seven days, both stores.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ═══════ TRACK ORDER ═══════ -->
+<div class="page" id="page-track">
+  <div class="shell">
+    <div class="page-head">
+      <button class="crumb" onclick="go('home')">← Home</button>
+      <h1>Track your order</h1>
+      <p class="muted" style="max-width:520px;margin-top:12px">
+        Every delivery ships with Trans Express and is trackable door to door.
+        Enter the order number from your confirmation message.
+      </p>
+    </div>
+    <div class="track-layout">
+      <div class="track-card">
+        <form class="track-form" onsubmit="trackSubmit(event)">
+          <div class="field" style="margin:0">
+            <label for="tr-no">Order number</label>
+            <input id="tr-no" required placeholder="e.g. BRK-10482">
+          </div>
+          <div class="field" style="margin:0">
+            <label for="tr-ph">Phone used at checkout</label>
+            <input id="tr-ph" type="tel" required placeholder="07X XXX XXXX">
+          </div>
+          <button class="pill pill-dark pill-block" type="submit">Track order</button>
+        </form>
+        <div class="timeline" id="timeline">
+          <div class="t-head">
+            <b id="tlTitle"></b>
+            <span class="status-pill">Out for delivery</span>
+          </div>
+          <div id="tlSteps"></div>
+        </div>
+      </div>
+      <div class="track-aside">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
+          <b>Colombo &amp; suburbs</b><span>Usually next working day</span>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <b>Rest of the island</b><span>2–4 working days</span>
+        </div>
+        <a class="pill pill-tint pill-block" href="https://wa.me/94770657669?text=Hi%20Barracks!%20Where%20is%20my%20order%3F" target="_blank" rel="noopener">Can't find it? WhatsApp us</a>
+        <p class="hint" style="text-align:center">Demo page — production connects live to the Trans Express tracking API.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ RETURNS & EXCHANGES ═══════ -->
+<div class="page" id="page-returns">
+  <div class="shell">
+    <div class="page-head">
+      <button class="crumb" onclick="go('home')">← Home</button>
+      <h1>Returns &amp; exchanges</h1>
+      <p class="muted" style="max-width:520px;margin-top:12px">
+        Wrong size happens — we make the swap painless. Here's how it works.
+      </p>
+    </div>
+
+    <div class="fact-grid">
+      <div class="fact-card"><b>7 days</b><span>to start an exchange or return, counted from the day your order arrives</span></div>
+      <div class="fact-card"><b>Unworn</b><span>items with original tags attached — try-on at home is fine</span></div>
+      <div class="fact-card"><b>Free size swap</b><span>first exchange ships free, island-wide, both directions</span></div>
+    </div>
+
+    <div class="sec-head"><div><h2>How an exchange works</h2></div></div>
+    <div class="how-steps">
+      <div class="how-step"><i>1</i><b>Message us</b><span>WhatsApp 077 065 7669 with your order number and the size or colour you want instead.</span></div>
+      <div class="how-step"><i>2</i><b>Courier pickup</b><span>We send Trans Express to collect — no post office queues. Pack the item with its tags.</span></div>
+      <div class="how-step"><i>3</i><b>Swap ships same day</b><span>Your replacement leaves the store the day the pickup is confirmed. Refunds settle in 3–5 working days.</span></div>
+    </div>
+
+    <div class="sec-head"><div><h2>The fine print</h2></div></div>
+    <div class="acc">
+      <div class="acc-item">
+        <button class="acc-head" onclick="accToggle(this)">What can't be returned?<span class="chev">▼</span></button>
+        <div class="acc-body"><div><p>For hygiene reasons: underwear, socks and deodorants/body sprays are final sale. Sale items marked "final" can be exchanged for size but not refunded.</p></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" onclick="accToggle(this)">How do refunds work?<span class="chev">▼</span></button>
+        <div class="acc-body"><div><p>Card and Koko/MintPay payments reverse to the original method in 3–5 working days after we receive the item. Cash-on-delivery orders are refunded by bank transfer — send your account details on WhatsApp.</p></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" onclick="accToggle(this)">The item arrived damaged or wrong<span class="chev">▼</span></button>
+        <div class="acc-body"><div><p>That's on us. Send a photo on WhatsApp within 48 hours of delivery and we'll ship the correct item immediately with pickup of the wrong one — no forms, no arguing.</p></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" onclick="accToggle(this)">Can I exchange in store?<span class="chev">▼</span></button>
+        <div class="acc-body"><div><p>Yes — bring the item and its tags to Kohuwala or Dehiwala within 7 days, any day 10:30–20:30. In-store exchanges are instant.</p></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head" onclick="accToggle(this)">I bought during the 2-for-5,000 offer<span class="chev">▼</span></button>
+        <div class="acc-body"><div><p>Size exchanges are free as normal. If you return one pant of a pair for refund, the remaining pant reverts to its regular single price and the difference is deducted from the refund.</p></div></div>
+      </div>
+    </div>
+
+    <p class="draft-note">Draft policy copy for client approval — numbers (window, refund timing, free-swap terms) to be confirmed against Barracks' actual operations before launch.</p>
+
+    <div style="padding-bottom:72px">
+      <a class="pill pill-tint" href="https://wa.me/94770657669?text=Hi%20Barracks!%20I%27d%20like%20to%20exchange%20an%20item." target="_blank" rel="noopener">Start an exchange on WhatsApp</a>
+    </div>
+  </div>
+</div>
+</main>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="shell">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#" onclick="go('home');return false" style="justify-self:start">
+          <svg class="brand-box" viewBox="0 0 300 300" aria-hidden="true" style="color:var(--ink)">
+            <rect x="24" y="18" width="252" height="264" fill="none" stroke="currentColor" stroke-width="15"/>
+            <text x="150" y="235" font-family="Georgia,serif" font-style="italic" font-size="240" fill="currentColor" text-anchor="middle">B</text>
+          </svg>
+          <span class="wordmark" style="color:var(--ink)">Barracks<small style="color:var(--ink-2)">Clothing</small></span>
+        </a>
+        <p>Always different. That's the standard. Menswear from Kohuwala &amp; Dehiwala — shipped island-wide across Sri Lanka.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><button onclick="goShop('pants')">Pants</button></li>
+          <li><button onclick="goShop('tees')">Tees &amp; polos</button></li>
+          <li><button onclick="goShop('shirts')">Shirts</button></li>
+          <li><button onclick="goShop('jackets')">Jackets</button></li>
+          <li><button onclick="goShop('pants')" style="color:var(--signal);font-weight:600">2 for Rs 5,000</button></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><button onclick="toast('Prototype — links to per-category size guides')">Size guide</button></li>
+          <li><button onclick="go('track')">Track your order</button></li>
+          <li><button onclick="go('returns')">Returns &amp; exchanges</button></li>
+          <li><button onclick="go('visit')">Contact us</button></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <ul>
+          <li>105 Dutugemunu Street, Kohuwala</li>
+          <li>75 Nikape Road, Dehiwala</li>
+          <li>077 065 7669 · 10:30–20:30 daily</li>
+          <li style="display:flex;gap:14px;margin-top:6px">
+            <a href="https://www.tiktok.com/@barracksclothing" target="_blank" rel="noopener">TikTok</a>
+            <a href="https://www.instagram.com/barracksclothing/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.facebook.com/barracks.lk/" target="_blank" rel="noopener">Facebook</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Barracks Clothing. All rights reserved.</span>
+      <span>Design prototype — sample data · photos: Unsplash free-license placeholders</span>
+    </div>
+  </div>
+</footer>
+
+<!-- cart sheet -->
+<div class="scrim" id="scrim" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping bag">
+  <div class="drawer-head">
+    <b>Your bag</b>
+    <button class="drawer-close" onclick="closeCart()" aria-label="Close bag">✕</button>
+  </div>
+  <div class="ship-bar" id="shipBar">
+    <div class="msg" id="shipMsg"></div>
+    <div class="ship-track"><div class="ship-fill" id="shipFill"></div></div>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="offer-applied" id="offerApplied">
+      <span>Offer applied · 2 pants for Rs 5,000</span><span id="offerSave"></span>
+    </div>
+    <div class="subtotal"><span>Subtotal</span><span id="subtotal">Rs 0</span></div>
+    <a class="pill pill-tint pill-block" id="waOrder" href="#" target="_blank" rel="noopener">Order via WhatsApp</a>
+    <button class="pill pill-gray pill-block" onclick="toast('Prototype — checkout wires to Shopify in production')">Checkout</button>
+    <div class="pay-badges" aria-label="Accepted payment methods">
+      <span>Apple Pay</span><span>G Pay</span><span>VISA</span><span>Mastercard</span><span>AMEX</span><span>Koko</span><span>MintPay</span><span>COD</span>
+    </div>
+    <div class="drawer-note">Most Barracks orders happen over WhatsApp — it stays one tap away.</div>
+  </div>
+</aside>
+
+<div class="buybar" id="buybar">
+  <span class="price" id="buybarPrice"></span>
+  <button class="pill pill-dark" style="width:100%" onclick="pdpAdd()">Add to bag</button>
+  <a class="pill pill-tint" id="buybarWa" href="#" target="_blank" rel="noopener" aria-label="Order on WhatsApp">WA</a>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="proto-tag">Design prototype · sample data · Unsplash placeholder photography</div>
+<script>
+/* ═══════════ CONFIG ═══════════ */
+const WA = "94770657669";
+const U = (id,w=900) => "https://images.unsplash.com/"+id+"?q=80&w="+w+"&auto=format&fit=crop";
+/* Unsplash free-license placeholder photography — swap each ID for brand shoots.
+   Photo pages: https://unsplash.com/photos/<id-suffix> */
+const IMGS = {
+  heroStreet:"photo-1488161628813-04466f872be2",
+  heroRack:"photo-1441986300917-64674bd600d8",
+  heroPortrait:"photo-1552374196-1ab2a1c593e8",
+  chinoFlat:"photo-1598033129183-c4f50c736f10",
+  chinoModel:"photo-1473966968600-fa801b869a1a",
+  linenFlat:"photo-1594938298603-c8148c4dae35",
+  linenModel:"photo-1602810318383-e386cc2a3ccf",
+  denimFlat:"photo-1541099649105-f69ad21f3246",
+  athModel:"photo-1617137968427-85924c800a22",
+  teeFlat:"photo-1562157873-818bc0726f68",
+  teeModel:"photo-1521572163474-6864f9cf17ab",
+  teeStack:"photo-1620799140408-edc6dcb6d633",
+  poloFlat:"photo-1624378439575-d8705ad7ae80",
+  poloModel:"photo-1603252109303-2751441dd157",
+  shirtFlat:"photo-1523381210434-271e8be1f52b",
+  shirtModel:"photo-1596755094514-f87e34085b2c",
+  portrait:"photo-1507003211169-0a1dd7228f2d",
+  jacketStreet:"photo-1591047139829-d91aecb6caea",
+  jacketModel:"photo-1551028719-00167b16eac5"
+};
+
+/* ═══════════ PRODUCTS (sample data — prototype) ═══════════ */
+const CH_PANTS = (extra)=>({cols:["Size","Waist (in)","Hip (in)","Length (in)"],
+  rows:[["28","28–29","36",extra[0]],["30","30–31","38",extra[1]],["32","32–33","40",extra[2]],["34","34–35","42",extra[3]],["36","36–37","44",extra[4]],["38","38–39","46",extra[5]]]});
+const PRODUCTS = [
+  {id:1, name:"Golf Chino Pant", cat:"pants", icon:"g-pants", price:2750, offer:true, badge:"best",
+   fabric:"Cotton twill, 98/2 stretch", fit:"Relaxed taper", care:"Cold wash, hang dry",
+   img:U(IMGS.chinoFlat), model:U(IMGS.chinoModel),
+   colors:[{n:"Olive",h:"#4A5240"},{n:"Khaki",h:"#B3A886"},{n:"Black",h:"#26282A"},{n:"Navy",h:"#2E3A4A"}],
+   sizes:["28","30","32","34","36","38"],
+   chart:CH_PANTS(["39","40","40.5","41","41.5","42"]),
+   fitNote:"Model is 5'11\" and wears a 32",
+   desc:"The pant the 2-for-5,000 offer was built around. A clean flat front, deep pockets and just enough stretch to survive a long day — office in the morning, Galle Face by sunset.",
+   details:["Two-way stretch twill holds a crease without ironing","Deep front pockets + secure back button pockets","Pre-shrunk and colour-locked for Sri Lankan wash cycles"]},
+  {id:2, name:"Linen Pant", cat:"pants", icon:"g-pants", price:2950, offer:true, badge:"new",
+   fabric:"100% linen", fit:"Straight, mid-rise", care:"Gentle wash, low iron",
+   img:U(IMGS.linenFlat), model:U(IMGS.linenModel),
+   colors:[{n:"Natural",h:"#C9BB98"},{n:"Sand",h:"#B8A582"},{n:"Black",h:"#26282A"}],
+   sizes:["28","30","32","34","36","38"],
+   chart:CH_PANTS(["39.5","40.5","41","41.5","42","42.5"]),
+   fitNote:"Model is 6'0\" and wears a 32",
+   desc:"Colombo-weather linen — breathes at noon, still looks sharp at the evening reception. Cut straight with a mid-rise so it drapes instead of clinging.",
+   details:["True 100% linen — no poly blend shortcuts","Breathable open weave for 30°+ humidity","French-seamed to stop fray after repeat washing"]},
+  {id:3, name:"Baggy Big Fold Pant", cat:"pants", icon:"g-pants", price:3200, offer:true, badge:"new",
+   fabric:"Heavy 320gsm cotton", fit:"Baggy, deep fold hem", care:"Cold wash inside-out",
+   img:U(IMGS.denimFlat), model:U(IMGS.heroStreet),
+   colors:[{n:"Grey Marl",h:"#7D7A72"},{n:"Stone",h:"#A39D8D"},{n:"Black",h:"#26282A"}],
+   sizes:["28","30","32","34","36"],
+   chart:CH_PANTS(["40","41","41.5","42","42.5","—"]),
+   fitNote:"Model is 5'10\" and wears a 30 for the full stack",
+   desc:"The wide silhouette from the drops everyone DMs about. Heavyweight cotton, a deep folded hem and a stacked break that photographs exactly like the reels.",
+   details:["320gsm cotton keeps the wide leg structured, not floppy","Signature deep fold hem — wear folded or stacked","Roomy through thigh, anchored at the waist"]},
+  {id:4, name:"Track Bottom — Water Repellent", cat:"pants", icon:"g-pants", price:2400, offer:true, badge:null,
+   fabric:"DWR-coated tech shell", fit:"Tapered, elastic cuff", care:"Machine wash cold",
+   img:null, model:U(IMGS.athModel),
+   colors:[{n:"Black",h:"#26282A"},{n:"Graphite",h:"#4A4E4C"}],
+   sizes:["S","M","L","XL"],
+   chart:{cols:["Size","Waist (in)","Hip (in)","Inseam (in)"],rows:[["S","28–30","38","28"],["M","30–32","40","28.5"],["L","32–34","42","29"],["XL","34–36","44","29.5"]]},
+   fitNote:"Model is 5'11\" and wears M",
+   desc:"Monsoon-proof taper. A light DWR shell that shrugs off drizzle, zip pockets that hold your phone on the bike, and a cuff that stays off the chain.",
+   details:["Water-repellent coating — drizzle beads and rolls off","Zip security pockets front and back","Dries in under an hour after a full soak"]},
+  {id:5, name:"Oversize Tee", cat:"tees", icon:"g-tee", price:1950, offer:false, badge:"new",
+   fabric:"220gsm combed cotton", fit:"Oversize, drop shoulder", care:"Cold wash, no tumble",
+   img:U(IMGS.teeFlat), model:U(IMGS.teeModel),
+   colors:[{n:"Off-White",h:"#CFCBBE"},{n:"Black",h:"#26282A"},{n:"Olive",h:"#4A5240"},{n:"Washed Blue",h:"#5A6C7E"}],
+   sizes:["S","M","L","XL","XXL"],
+   chart:{cols:["Size","Chest (in)","Length (in)","Shoulder (in)"],rows:[["S","42","28","19"],["M","44","29","20"],["L","46","30","21"],["XL","48","31","22"],["XXL","50","32","23"]]},
+   fitNote:"Model is 6'0\" and wears M for the oversize look",
+   desc:"The heavyweight boxy tee from the try-on videos. Cut two sizes roomy with a drop shoulder, on 220gsm cotton that hangs straight and never goes see-through.",
+   details:["220gsm — heavyweight, zero transparency","Ribbed collar keeps shape past 50 washes","Shrink-controlled: buy your usual size for the same fit forever"]},
+  {id:6, name:"Dri-Fit Crew Tee", cat:"tees", icon:"g-tee", price:1450, offer:false, badge:null,
+   fabric:"Performance micro-poly", fit:"Athletic", care:"Quick-dry, machine wash",
+   img:U(IMGS.teeStack), model:U(IMGS.athModel),
+   colors:[{n:"Black",h:"#26282A"},{n:"White",h:"#CFCBBE"},{n:"Maroon",h:"#6B3238"}],
+   sizes:["S","M","L","XL","XXL"],
+   chart:{cols:["Size","Chest (in)","Length (in)","Shoulder (in)"],rows:[["S","38","27","17"],["M","40","28","18"],["L","42","29","19"],["XL","44","30","20"],["XXL","46","31","21"]]},
+   fitNote:"Model is 5'11\" and wears L",
+   desc:"The original Barracks staple — the dry-fit tee the brand was built on. Sweat-wicking, feather-light and priced so you buy three.",
+   details:["Micro-poly wicks sweat and dries on the walk home","Flatlock seams — no chafe at the gym or on the pitch","Colour-fast: the black stays black"]},
+  {id:7, name:"Polo Neck Tee", cat:"tees", icon:"g-polo", price:2150, offer:false, badge:null,
+   fabric:"Cotton piqué", fit:"Regular", care:"Cold wash",
+   img:U(IMGS.poloFlat), model:U(IMGS.poloModel),
+   colors:[{n:"Olive",h:"#4A5240"},{n:"Navy",h:"#2E3A4A"},{n:"Stone",h:"#A39D8D"}],
+   sizes:["S","M","L","XL","XXL"],
+   chart:{cols:["Size","Chest (in)","Length (in)","Shoulder (in)"],rows:[["S","38","27.5","17"],["M","40","28.5","18"],["L","42","29.5","19"],["XL","44","30.5","20"],["XXL","46","31.5","21"]]},
+   fitNote:"Model is 5'10\" and wears M",
+   desc:"Office-safe up top, weekend-ready everywhere else. A tight piqué knit that doesn't bag out at the collar by lunchtime.",
+   details:["Two-button placket with reinforced stitching","Tight-knit piqué resists pulling and pilling","Side vents so it sits clean, tucked or untucked"]},
+  {id:8, name:"Cuban Collar Shirt", cat:"shirts", icon:"g-shirt", price:3450, offer:false, badge:"best",
+   fabric:"Viscose blend", fit:"Relaxed", care:"Gentle wash, drip dry",
+   img:U(IMGS.shirtFlat), model:U(IMGS.shirtModel),
+   colors:[{n:"Sage",h:"#97A08A"},{n:"Cream",h:"#C4B999"},{n:"Black",h:"#26282A"}],
+   sizes:["S","M","L","XL","XXL"],
+   chart:{cols:["Size","Chest (in)","Length (in)","Shoulder (in)"],rows:[["S","40","28","18"],["M","42","29","19"],["L","44","30","20"],["XL","46","31","21"],["XXL","48","32","22"]]},
+   fitNote:"Model is 6'0\" and wears M, top button open",
+   desc:"The party shirt from the TikToks. An open Cuban collar and a fluid drape that moves — made for Colombo nights when the AC gives up.",
+   details:["Fluid viscose drape — never boxy, never clingy","Open camp collar sits flat without ironing","First-date approved, reception safe"]},
+  {id:9, name:"Chinese Collar Shirt", cat:"shirts", icon:"g-shirt", price:3250, offer:false, badge:null,
+   fabric:"Cotton poplin", fit:"Slim", care:"Warm iron",
+   img:null, model:U(IMGS.portrait),
+   colors:[{n:"White",h:"#CFCBBE"},{n:"Black",h:"#26282A"},{n:"Olive",h:"#4A5240"}],
+   sizes:["S","M","L","XL","XXL"],
+   chart:{cols:["Size","Chest (in)","Length (in)","Shoulder (in)"],rows:[["S","38","28","17"],["M","40","29","17.5"],["L","42","30","18"],["XL","44","31","19"],["XXL","46","32","20"]]},
+   fitNote:"Model is 5'11\" and wears M buttoned to the top",
+   desc:"Band collar, no fuss. Buttons to the top for formal, sleeves rolled for everything else — the shirt that works at a poya-day lunch and a Monday meeting.",
+   details:["Crisp poplin with a soft-wash finish","Collar band stays upright without stays","Slim through the body, full range in the shoulder"]},
+  {id:10, name:"Varsity Jacket", cat:"jackets", icon:"g-jacket", price:5900, offer:false, badge:"new",
+   fabric:"Felt body, PU sleeves", fit:"Boxy", care:"Spot clean",
+   img:U(IMGS.jacketStreet), model:U(IMGS.jacketModel),
+   colors:[{n:"Black/Cream",h:"#26282A"},{n:"Wine",h:"#6B3238"},{n:"Navy",h:"#2E3A4A"}],
+   sizes:["S","M","L","XL"],
+   chart:{cols:["Size","Chest (in)","Length (in)","Sleeve (in)"],rows:[["S","44","26","24"],["M","46","27","24.5"],["L","48","28","25"],["XL","50","29","25.5"]]},
+   fitNote:"Model is 6'1\" and wears L with a hoodie under",
+   desc:"The drop that keeps selling out on video. Structured felt body, contrast PU sleeves, ribbed trims — sized boxy so it layers over anything.",
+   details:["Snap-front closure with metal hardware","Ribbed collar, cuffs and hem hold their bounce","Interior phone pocket — reels-tested"]}
+];
+const CATS = [
+  {key:"all", label:"All"},
+  {key:"pants", label:"Pants"},
+  {key:"tees", label:"Tees & Polos"},
+  {key:"shirts", label:"Shirts"},
+  {key:"jackets", label:"Jackets"}
+];
+const HOME_CATS = [
+  {label:"Golf Chinos", sub:"From Rs 2,750", filter:"pants", icon:"g-pants", c:"#4A5240", img:U(IMGS.chinoFlat,700)},
+  {label:"Linen Pants", sub:"Colombo-weather", filter:"pants", icon:"g-pants", c:"#B8A582", img:U(IMGS.linenFlat,700)},
+  {label:"Oversize Tees", sub:"220gsm heavyweight", filter:"tees", icon:"g-tee", c:"#26282A", img:U(IMGS.teeModel,700)},
+  {label:"Party Shirts", sub:"Cuban collar", filter:"shirts", icon:"g-shirt", c:"#97A08A", img:U(IMGS.shirtModel,700)},
+  {label:"Chinese Collar", sub:"Clean & formal", filter:"shirts", icon:"g-shirt", c:"#5A6C7E", img:U(IMGS.portrait,700)},
+  {label:"Varsity Jackets", sub:"New drop", filter:"jackets", icon:"g-jacket", c:"#6B3238", img:U(IMGS.jacketModel,700)}
+];
+const REELS = [
+  {t:"Party shirts", s:"Cuban collar · Colombo", img:U(IMGS.shirtModel,600), c:"#97A08A", icon:"g-shirt"},
+  {t:"Varsity drop", s:"New in store", img:U(IMGS.jacketModel,600), c:"#2E3A4A", icon:"g-jacket"},
+  {t:"2 for 5,000 haul", s:"Golf chinos", img:U(IMGS.chinoModel,600), c:"#4A5240", icon:"g-pants"},
+  {t:"Oversize tees", s:"Try-on · Kohuwala", img:U(IMGS.teeModel,600), c:"#26282A", icon:"g-tee"}
+];
+const HERO_SLIDES = [
+  {img:U(IMGS.heroPortrait,1800), alt:"Barracks campaign portrait", cap:"Campaign — The Standard"},
+  {img:U(IMGS.heroStreet,1800), alt:"Street-style menswear look", cap:"Baggy fold — new in"},
+  {img:U(IMGS.jacketModel,1800), alt:"Varsity jacket editorial", cap:"Varsity — back in stock"},
+  {img:U(IMGS.heroRack,1800), alt:"Inside the Barracks store", cap:"Inside Kohuwala HQ"}
+];
+const STORES = [
+  {name:"Kohuwala", addr:"105 Dutugemunu Street, Kohuwala", hrs:"Open daily · 10:30–20:30",
+   map:"https://maps.app.goo.gl/h55XCDHyp8iNQaFo6"},
+  {name:"Dehiwala", addr:"75 Nikape Road, Dehiwala", hrs:"Open daily · 10:30–20:30",
+   map:"https://www.google.com/maps/search/?api=1&query=75+Nikape+Road+Dehiwala"}
+];
+/* ratings, sample reviews (demo data), low-stock, free-delivery threshold */
+const FREE_SHIP = 7500;
+const RATING = {1:[4.8,26],2:[4.7,18],3:[4.9,31],4:[4.6,12],5:[4.9,44],6:[4.7,52],7:[4.6,15],8:[4.9,38],9:[4.8,21],10:[4.9,27]};
+const LOW = {1:{"34":2},3:{"30":1},5:{"M":2},8:{"L":2},10:{"M":1}};
+const REVIEWS = {
+  1:[{n:"Kasun P.",s:5,z:"32",t:"Wore it to work and straight to a wedding after. Crease held all day, no ironing."},
+     {n:"Dinesh W.",s:5,z:"34",t:"Took the 2 for 5,000 deal — olive and navy. Fit is exactly like the reels."},
+     {n:"Shehan F.",s:4,z:"32",t:"Great pant, runs slightly roomy at the thigh. Size true to waist."}],
+  2:[{n:"Ravindu J.",s:5,z:"32",t:"Actual linen, not the blend other shops sell. Survived a December wedding in Galle."},
+     {n:"Amila R.",s:4,z:"34",t:"Breathes well, wrinkles like linen does — steam it and go."}],
+  3:[{n:"Tharindu D.",s:5,z:"30",t:"The stack is REAL. Heavy fabric, sits exactly like the TikTok."},
+     {n:"Chamath K.",s:5,z:"32",t:"Got stopped twice at Colombo City Centre asking where it's from."}],
+  4:[{n:"Nuwan S.",s:5,z:"M",t:"Rode through drizzle from Nugegoda — legs dry. Zip pockets hold a phone fine."},
+     {n:"Isuru M.",s:4,z:"L",t:"Good taper, cuff stays put on the bike."}],
+  5:[{n:"Sachin B.",s:5,z:"M",t:"Proper 220gsm — heavy, boxy, zero see-through. Washed 10+ times, collar still sharp."},
+     {n:"Dilshan A.",s:5,z:"L",t:"Best oversize tee I've bought in SL. Buy your normal size."},
+     {n:"Yohan C.",s:4,z:"XL",t:"Slightly long for my height but that's the look. Quality is there."}],
+  6:[{n:"Pasindu H.",s:5,z:"M",t:"Bought 3 for the gym. Dry by the time I'm home from futsal."},
+     {n:"Lakshan V.",s:4,z:"L",t:"Light, wicks well, black stayed black."}],
+  7:[{n:"Janith G.",s:5,z:"M",t:"Collar doesn't curl after wash — that's rare at this price."},
+     {n:"Rusiru T.",s:4,z:"L",t:"Clean office polo. Olive is the one."}],
+  8:[{n:"Shanuka L.",s:5,z:"M",t:"THE party shirt. Sage one gets comments every single time."},
+     {n:"Kavindu N.",s:5,z:"L",t:"Drape is unreal for the price. Wore it open over a tee — perfect."},
+     {n:"Miyuru E.",s:4,z:"M",t:"Fabric is light and moves well. Wish there were more colours."}],
+  9:[{n:"Hasitha W.",s:5,z:"M",t:"Buttoned to the top for a meeting, rolled sleeves at dinner. Versatile."},
+     {n:"Sandun P.",s:4,z:"L",t:"Slim but not tight. Poplin irons crisp."}],
+  10:[{n:"Ashen R.",s:5,z:"L",t:"Sold out twice before I got mine — worth the chase. Sleeves feel premium."},
+      {n:"Vimukthi S.",s:5,z:"M",t:"Boxy enough for a hoodie under. Snap buttons are solid."}]
+};
+/* wishlist (session memory) */
+const wl = new Set();
+function toggleWl(pid, ev){
+  if(ev){ ev.stopPropagation(); }
+  const p = PRODUCTS.find(x=>x.id===pid);
+  if(wl.has(pid)){ wl.delete(pid); toast("Removed from saved"); }
+  else { wl.add(pid); toast(p.name + " saved to your list"); }
+  updateWlUI(ev && ev.currentTarget);
+}
+function updateWlUI(btn){
+  const c = document.getElementById("wlCount");
+  c.textContent = wl.size;
+  c.classList.toggle("hide", wl.size===0);
+  document.querySelectorAll(".heart-btn").forEach(b=>b.classList.toggle("saved", wl.has(+b.dataset.pid)));
+  if(btn){ btn.classList.remove("pop"); void btn.offsetWidth; btn.classList.add("pop"); }
+  if(shopFilter==="saved") renderShop();
+}
+const heartSVG = `<svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.7-9.5-9A5.4 5.4 0 0 1 12 6.6a5.4 5.4 0 0 1 9.5 4.9c-2 4.3-9.5 9-9.5 9z"/></svg>`;
+const glyphs = r => "★".repeat(Math.round(r)) + "☆".repeat(5-Math.round(r));
+const fmt = n => "Rs " + n.toLocaleString("en-LK");
+const instal = p => "Rs " + Math.round(p/3).toLocaleString("en-LK");
+const isLight = h => {
+  const c = parseInt(h.slice(1),16);
+  return (0.299*((c>>16)&255) + 0.587*((c>>8)&255) + 0.114*(c&255)) > 165;
+};
+
+/* ═══════════ RENDER HELPERS ═══════════ */
+function imgTag(url, cls="", alt=""){
+  if(!url) return "";
+  return `<img class="img-layer ${cls}" alt="${alt}" loading="lazy" src="${url}"
+    onload="this.classList.add('loaded')" onerror="this.classList.add('gone')">`;
+}
+function tileHTML(p, colorIdx=0, photo=null, photoCls=""){
+  const c = p.colors[colorIdx];
+  const bg = isLight(c.h)
+    ? "linear-gradient(180deg,#EDEDF0 0%,#E3E3E7 100%)"
+    : "linear-gradient(180deg,#F7F7F9 0%,#EFEFF2 100%)";
+  return `<div class="tile" style="background:${bg};color:${c.h}" aria-label="${p.name} — ${c.n}">
+    <svg class="garment" viewBox="0 0 100 100"><use href="#${p.icon}"/></svg>
+    ${photo?imgTag(photo,photoCls,p.name):""}
+  </div>`;
+}
+function badgesHTML(p){
+  let b = "";
+  if(p.offer) b += `<span class="badge signal">2 for Rs 5,000</span>`;
+  if(p.badge==="new") b += `<span class="badge tint">New</span>`;
+  if(p.badge==="best") b += `<span class="badge">Best seller</span>`;
+  return b ? `<div class="badges">${b}</div>` : "";
+}
+
+/* ═══════════ ROUTER ═══════════ */
+let shopFilter = "all";
+function go(page){
+  document.querySelectorAll(".page").forEach(el=>el.classList.remove("on"));
+  document.getElementById("page-"+page).classList.add("on");
+  document.querySelectorAll(".nav-links button").forEach(b=>b.classList.remove("active"));
+  const map = {home:"nl-home", shop:"nl-shop", product:"nl-shop", visit:"nl-visit"};
+  const nb = document.getElementById(map[page]); if(nb) nb.classList.add("active");
+  document.getElementById("buybar").classList.toggle("show", page==="product");
+  window.scrollTo({top:0, behavior:"auto"});
+}
+function goShop(filter){ shopFilter = filter; renderShop(); go("shop"); }
+
+/* ═══════════ HERO SLIDESHOW ═══════════ */
+let heroIdx = 0, heroTimer;
+function initHero(){
+  document.getElementById("heroSlides").innerHTML = HERO_SLIDES.map((s,i)=>`
+    <div class="hero-slide${i===0?" on":""}" id="hs-${i}">
+      <div class="fallback"></div>
+      <img alt="${s.alt}" ${i===0?'loading="eager" fetchpriority="high"':'loading="lazy"'} src="${s.img}"
+        onload="this.classList.add('loaded')" onerror="this.classList.add('gone')">
+    </div>`).join("");
+  document.getElementById("heroDots").innerHTML = HERO_SLIDES.map((_,i)=>
+    `<button id="hd-${i}" class="${i===0?"on":""}" onclick="heroGo(${i},true)" aria-label="Slide ${i+1}"></button>`).join("");
+  heroTimer = setInterval(()=>heroGo((heroIdx+1)%HERO_SLIDES.length,false), 5200);
+  heroGo(0, false);
+}
+function heroGo(i, manual){
+  heroIdx = i;
+  HERO_SLIDES.forEach((_,k)=>{
+    document.getElementById("hs-"+k).classList.toggle("on", k===i);
+    document.getElementById("hd-"+k).classList.toggle("on", k===i);
+  });
+  document.getElementById("heroCapT").textContent = HERO_SLIDES[i].cap;
+  document.getElementById("heroCapI").textContent = String(i+1).padStart(2,"0") + " / " + String(HERO_SLIDES.length).padStart(2,"0");
+  if(manual){ clearInterval(heroTimer); heroTimer = setInterval(()=>heroGo((heroIdx+1)%HERO_SLIDES.length,false), 5200); }
+}
+/* follower count-up */
+function countUp(){
+  const el = document.getElementById("statTk"), target = 227.8, dur = 1600, t0 = performance.now();
+  function step(t){
+    const k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+    el.textContent = (target*e).toFixed(1) + "K";
+    if(k<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ═══════════ MARQUEE ═══════════ */
+function initMarquee(){
+  const items = ["New drop today","<b class='hot'>Any 2 pants — Rs 5,000</b>","Island-wide delivery","Always different — that's the standard"];
+  const seq = items.concat(items).map(i=>`<span>${i}<i></i></span>`).join("");
+  document.getElementById("marqTrack").innerHTML = seq + seq;
+}
+
+/* ═══════════ HOME ═══════════ */
+function renderHome(){
+  document.getElementById("catGrid").innerHTML = HOME_CATS.map(c=>`
+    <button class="cat-card${c.img?" has-photo":""}" onclick="goShop('${c.filter}')">
+      <div class="tile" style="color:${c.c}">
+        <svg class="garment" viewBox="0 0 100 100"><use href="#${c.icon}"/></svg>
+        ${imgTag(c.img,"",c.label)}
+      </div>
+      <div class="cat-shade"></div>
+      <div class="cat-meta"><b>${c.label}</b><span>${c.sub}</span></div>
+      <span class="cat-arrow">→</span>
+    </button>`).join("");
+  const newOrder = [3,10,5,2,1,8].map(id=>PRODUCTS.find(p=>p.id===id));
+  document.getElementById("newRail").innerHTML = newOrder.map(prodCard).join("");
+  document.getElementById("reelGrid").innerHTML = REELS.map(r=>`
+    <a class="reel" href="https://www.tiktok.com/@barracksclothing" target="_blank" rel="noopener">
+      <div class="tile" style="color:${r.c}">
+        <svg class="garment" viewBox="0 0 100 100"><use href="#${r.icon}"/></svg>
+        ${imgTag(r.img,"",r.t)}
+      </div>
+      <div class="play"></div>
+      <figcaption><b>${r.t}</b><span>${r.s}</span></figcaption>
+    </a>`).join("");
+}
+function railScroll(dir){
+  document.getElementById("newRail").scrollBy({left:dir*286, behavior:"smooth"});
+}
+function storeCard(s){
+  return `<div class="store-card">
+    <div class="store-map" aria-hidden="true">
+      <svg viewBox="0 0 300 120" preserveAspectRatio="xMidYMid slice">
+        <rect width="300" height="120" fill="#EDEDF0"/>
+        <g stroke="#FFFFFF" stroke-width="7"><path d="M-10 30 L310 55"/><path d="M-10 95 L310 78"/><path d="M70 -10 L95 130"/><path d="M210 -10 L190 130"/></g>
+        <g stroke="#E0E0E4" stroke-width="1.5"><path d="M-10 30 L310 55"/><path d="M-10 95 L310 78"/><path d="M70 -10 L95 130"/><path d="M210 -10 L190 130"/></g>
+        <g transform="translate(150,50)">
+          <circle cx="0" cy="0" r="16" fill="rgba(74,82,64,.15)"/>
+          <path d="M0 -14 a10 10 0 0 1 10 10 c0 7 -10 18 -10 18 s-10 -11 -10 -18 a10 10 0 0 1 10 -10z" fill="#4A5240"/>
+          <circle cx="0" cy="-4" r="4" fill="#fff"/>
+        </g>
+      </svg>
+    </div>
+    <div class="store-body">
+      <h3>${s.name}</h3>
+      <span class="addr">${s.addr}</span>
+      <span class="hrs">${s.hrs}</span>
+      <div class="store-ctas">
+        <a class="pill pill-tint" href="https://wa.me/${WA}?text=${encodeURIComponent("Hi Barracks! Checking stock at "+s.name+".")}" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="pill pill-gray" href="${s.map}" target="_blank" rel="noopener">Directions</a>
+      </div>
+    </div>
+  </div>`;
+}
+function renderStores(){
+  const html = STORES.map(storeCard).join("");
+  document.getElementById("storeGridHome").innerHTML = html;
+  document.getElementById("storeGridVisit").innerHTML = html;
+}
+
+/* ═══════════ SHOP ═══════════ */
+function prodCard(p){
+  const a = p.img || p.model, b = (p.img && p.model) ? p.model : null;
+  const r = RATING[p.id];
+  const lowBadge = LOW[p.id] ? `<span class="badge low">Low stock</span>` : "";
+  return `<button class="prod-card" onclick="openProduct(${p.id})">
+    <div class="prod-media">
+      ${badgesHTML(p).replace('</div>', lowBadge+'</div>') || (lowBadge?`<div class="badges">${lowBadge}</div>`:"")}
+      <span class="heart-btn${wl.has(p.id)?" saved":""}" data-pid="${p.id}" role="button" aria-label="Save ${p.name}"
+        onclick="toggleWl(${p.id},event)">${heartSVG}</span>
+      ${tileHTML(p,0)}
+      <div style="position:absolute;inset:0;pointer-events:none">${imgTag(a,"img-a",p.name)}${b?imgTag(b,"img-b",p.name+" worn"):""}</div>
+    </div>
+    <div class="prod-body">
+      <b>${p.name}</b>
+      <span class="stars-line"><span class="star">★</span><b>${r[0]}</b>(${r[1]})<span style="margin-left:auto"></span></span>
+      <span class="size-row">${p.sizes.join(" · ")}</span>
+      <div class="prod-price-row">
+        <span class="price">${fmt(p.price)}</span>
+        <span class="quick-add" role="button" aria-label="Quick add ${p.name}"
+          onclick="event.stopPropagation();quickAdd(${p.id})">+</span>
+      </div>
+      <span class="bnpl">or 3 × <b>${instal(p.price)}</b> with Koko · MintPay</span>
+    </div>
+  </button>`;
+}
+function renderShop(){
+  const allCats = wl.size ? CATS.concat([{key:"saved", label:"♥ Saved ("+wl.size+")"}]) : CATS;
+  document.getElementById("chips").innerHTML = allCats.map(c=>
+    `<button class="${c.key===shopFilter?"active":""}" onclick="goShop('${c.key}')" role="tab">${c.label}</button>`
+  ).join("");
+  let list = shopFilter==="saved"
+    ? PRODUCTS.filter(p=>wl.has(p.id))
+    : PRODUCTS.filter(p=>shopFilter==="all"||p.cat===shopFilter);
+  const sort = document.getElementById("sortSel").value;
+  if(sort==="lo") list = [...list].sort((a,b)=>a.price-b.price);
+  if(sort==="hi") list = [...list].sort((a,b)=>b.price-a.price);
+  document.getElementById("countNote").textContent = "Showing " + list.length + (list.length===1?" item":" items");
+  document.getElementById("prodGrid").innerHTML =
+    list.map(prodCard).join("") ||
+    `<p style="grid-column:1/-1;color:var(--ink-2)">${shopFilter==="saved"?"Nothing saved yet — tap the ♥ on any product.":"Nothing here yet."}</p>`;
+}
+
+/* ═══════════ PDP ═══════════ */
+let pdp = {id:1, color:0, size:null, view:"model"};
+function openProduct(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  pdp = {id, color:0, size:null, view: p.model ? "model" : (p.img ? "flat" : "c0")};
+  renderPDP();
+  go("product");
+}
+function pdpMain(p){
+  if(pdp.view==="model" && p.model) return tileHTML(p, pdp.color, p.model);
+  if(pdp.view==="flat" && p.img) return tileHTML(p, pdp.color, p.img);
+  const ci = pdp.view.startsWith("c") ? parseInt(pdp.view.slice(1)) : pdp.color;
+  return tileHTML(p, ci);
+}
+function renderPDP(){
+  const p = PRODUCTS.find(x=>x.id===pdp.id);
+  document.getElementById("pdpCrumb").textContent = "← All products / " + p.name;
+  const thumbs = [];
+  if(p.model) thumbs.push(`<button class="${pdp.view==="model"?"active":""}" onclick="setView('model')" aria-label="On model"><img alt="" loading="lazy" src="${p.model}" onerror="this.remove()"><span class="tlabel">Model</span></button>`);
+  if(p.img) thumbs.push(`<button class="${pdp.view==="flat"?"active":""}" onclick="setView('flat')" aria-label="Product shot"><img alt="" loading="lazy" src="${p.img}" onerror="this.remove()"><span class="tlabel">Detail</span></button>`);
+  p.colors.forEach((c,i)=>thumbs.push(`<button class="${pdp.view==="c"+i?"active":""}" onclick="setColorView(${i})" aria-label="${c.n}"><span class="fill" style="background:${c.h}"></span><span class="tlabel">${c.n}</span></button>`));
+  document.getElementById("pdpWrap").innerHTML = `
+    <div class="pdp-gallery">
+      <div class="pdp-main">${badgesHTML(p)}${pdpMain(p)}</div>
+      <div class="pdp-thumbs">${thumbs.join("")}</div>
+      <p class="hint" style="margin-top:10px">Placeholder photography (Unsplash) — colour selected: ${p.colors[pdp.color].n}</p>
+    </div>
+    <div class="pdp-info">
+      <span class="pdp-kicker">${CATS.find(c=>c.key===p.cat).label} · ${p.fabric}</span>
+      <h1>${p.name}</h1>
+      <div class="pdp-stars">
+        <span class="glyphs">${glyphs(RATING[p.id][0])}</span><b>${RATING[p.id][0]}</b>
+        <button onclick="document.getElementById('revBlock').scrollIntoView({behavior:'smooth'})">${RATING[p.id][1]} reviews</button>
+      </div>
+      <div class="pdp-price">
+        <span class="price">${fmt(p.price)}</span>
+        ${p.offer?`<span class="offer-chip">Any 2 pants → Rs 5,000</span>`:""}
+      </div>
+      <div class="pdp-bnpl">or 3 × <b style="color:var(--tint)">${instal(p.price)}</b> with Koko or MintPay</div>
+      <p class="pdp-desc">${p.desc}</p>
+      <ul class="pdp-details">${p.details.map(d=>`<li>${d}</li>`).join("")}</ul>
+      <span class="fit-note">📏 ${p.fitNote}</span>
+
+      <div class="opt-label"><span>Colour — ${p.colors[pdp.color].n}</span></div>
+      <div class="swatches">
+        ${p.colors.map((c,i)=>`<button class="swatch${i===pdp.color?" active":""}" style="background:${c.h}"
+          onclick="setColorView(${i})" aria-label="${c.n}"></button>`).join("")}
+      </div>
+
+      <div class="opt-label"><span>Size</span>
+        <button class="link" onclick="document.getElementById('sizeChart').classList.toggle('open')">Size guide</button>
+      </div>
+      <div class="sizes">
+        ${p.sizes.map(s=>`<button class="size-btn${pdp.size===s?" active":""}" onclick="setSize('${s}')">${s}${LOW[p.id]&&LOW[p.id][s]?'<span class="low-dot"></span>':''}</button>`).join("")}
+      </div>
+      ${pdp.size && LOW[p.id] && LOW[p.id][pdp.size] ? `<div class="low-note">Only ${LOW[p.id][pdp.size]} left in ${pdp.size} — order today</div>` : ""}
+      <div class="size-chart" id="sizeChart">
+        <table>
+          <thead><tr>${p.chart.cols.map(c=>`<th>${c}</th>`).join("")}</tr></thead>
+          <tbody>${p.chart.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody>
+        </table>
+        <div class="chart-note">Garment measurements in inches · ${p.fit} — ${p.fitNote.toLowerCase()}</div>
+      </div>
+
+      <div class="pdp-ctas">
+        <div style="display:flex;gap:10px">
+          <button class="pill pill-dark pill-block" onclick="pdpAdd()">Add to bag — ${fmt(p.price)}</button>
+          <span class="heart-btn heart-lg${wl.has(p.id)?" saved":""}" data-pid="${p.id}" role="button" aria-label="Save ${p.name}"
+            onclick="toggleWl(${p.id},event)">${heartSVG}</span>
+        </div>
+        <a class="pill pill-tint pill-block" target="_blank" rel="noopener"
+          href="https://wa.me/${WA}?text=${encodeURIComponent("Hi Barracks! I want the "+p.name+" ("+p.colors[pdp.color].n+"). Is it in stock?")}">
+          Order via WhatsApp</a>
+        ${p.offer?`<button class="pill pill-gray pill-block" onclick="goShop('pants')">Add a 2nd pant · pay Rs 5,000 total</button>`:""}
+      </div>
+
+      <dl class="spec-list">
+        <div class="spec-row"><dt>Fabric</dt><dd>${p.fabric}</dd></div>
+        <div class="spec-row"><dt>Fit</dt><dd>${p.fit}</dd></div>
+        <div class="spec-row"><dt>Care</dt><dd>${p.care}</dd></div>
+        <div class="spec-row"><dt>Delivery</dt><dd>Island-wide, 2–4 working days</dd></div>
+      </dl>
+
+      <div class="reviews" id="revBlock">
+        <div class="reviews-head">
+          <h3>Reviews · <span class="glyphs" style="color:#F5A623">★</span> ${RATING[p.id][0]} (${RATING[p.id][1]})</h3>
+          <button onclick="toast('Prototype — review form posts to Shopify in production')">Write a review</button>
+        </div>
+        ${(REVIEWS[p.id]||[]).map(r=>`
+        <div class="rev-card">
+          <div class="rev-top">
+            <span class="rev-ava">${r.n[0]}</span>
+            <div><b>${r.n}</b><span class="sub"><span class="verified">Verified buyer</span> · bought size ${r.z}</span></div>
+            <span class="glyphs">${glyphs(r.s)}</span>
+          </div>
+          <p>${r.t}</p>
+        </div>`).join("")}
+        <p class="hint">Sample reviews for demo — production collects real ones post-delivery via WhatsApp.</p>
+      </div>
+    </div>`;
+  document.getElementById("relatedGrid").innerHTML =
+    PRODUCTS.filter(x=>x.id!==p.id && x.cat===p.cat).concat(PRODUCTS.filter(x=>x.cat!==p.cat))
+      .slice(0,4).map(prodCard).join("");
+  document.getElementById("buybarPrice").textContent = fmt(p.price);
+  document.getElementById("buybarWa").href =
+    "https://wa.me/"+WA+"?text="+encodeURIComponent("Hi Barracks! I want the "+p.name+".");
+}
+function setView(v){ pdp.view = v; renderPDP(); }
+function setColorView(i){ pdp.color = i; pdp.view = "c"+i; renderPDP(); }
+function setSize(s){ pdp.size = s; renderPDP(); }
+
+/* ═══════════ BAG ═══════════ */
+let cart = [];
+function keyOf(it){ return it.pid+"|"+it.color+"|"+it.size; }
+function addToCart(pid, color, size){
+  const k = pid+"|"+color+"|"+size;
+  const found = cart.find(it=>keyOf(it)===k);
+  if(found) found.qty++;
+  else cart.push({pid, color, size, qty:1});
+  syncCart();
+  toast(PRODUCTS.find(x=>x.id===pid).name + " added to your bag");
+  const cc = document.getElementById("cartCount");
+  cc.classList.remove("bump"); void cc.offsetWidth; cc.classList.add("bump");
+}
+function quickAdd(pid){
+  const p = PRODUCTS.find(x=>x.id===pid);
+  addToCart(pid, 0, p.sizes[1]);
+}
+function pdpAdd(){
+  const p = PRODUCTS.find(x=>x.id===pdp.id);
+  if(!pdp.size){ toast("Choose a size first"); return; }
+  addToCart(p.id, pdp.color, pdp.size);
+  openCart();
+}
+function cartQty(k, d){
+  const it = cart.find(x=>keyOf(x)===k);
+  if(!it) return;
+  it.qty += d;
+  if(it.qty<=0) cart = cart.filter(x=>keyOf(x)!==k);
+  syncCart();
+}
+function cartRemove(k){ cart = cart.filter(x=>keyOf(x)!==k); syncCart(); }
+function cartTotals(){
+  let pantsUnits = [], raw = 0;
+  cart.forEach(it=>{
+    const p = PRODUCTS.find(x=>x.id===it.pid);
+    raw += p.price*it.qty;
+    if(p.offer) for(let i=0;i<it.qty;i++) pantsUnits.push(p.price);
+  });
+  pantsUnits.sort((a,b)=>b-a);
+  const pairs = Math.floor(pantsUnits.length/2);
+  let save = 0;
+  for(let i=0;i<pairs;i++) save += pantsUnits[2*i] + pantsUnits[2*i+1] - 5000;
+  save = Math.max(0, save);
+  return {raw, save, total: raw-save, pairs};
+}
+function syncCart(){
+  const n = cart.reduce((a,b)=>a+b.qty,0);
+  document.getElementById("cartCount").textContent = n;
+  const wrap = document.getElementById("drawerItems");
+  if(!cart.length){
+    wrap.innerHTML = `<div class="cart-empty"><b>Your bag is empty</b>Find something different.<br><br><button class="pill pill-gray" onclick="closeCart();goShop('all')">Start shopping</button></div>`;
+  } else {
+    wrap.innerHTML = cart.map(it=>{
+      const p = PRODUCTS.find(x=>x.id===it.pid);
+      const k = keyOf(it);
+      return `<div class="ci">
+        ${tileHTML(p, it.color, p.img||p.model)}
+        <div>
+          <b>${p.name}</b>
+          <div class="sub">${p.colors[it.color].n} · Size ${it.size}</div>
+          <div class="qty">
+            <button onclick="cartQty('${k}',-1)" aria-label="Decrease">−</button>
+            <span>${it.qty}</span>
+            <button onclick="cartQty('${k}',1)" aria-label="Increase">+</button>
+          </div>
+        </div>
+        <div class="ci-right">
+          <span class="price" style="font-size:13.5px">${fmt(p.price*it.qty)}</span>
+          <button class="ci-remove" onclick="cartRemove('${k}')">Remove</button>
+        </div>
+      </div>`;
+    }).join("");
+  }
+  const t = cartTotals();
+  const oa = document.getElementById("offerApplied");
+  oa.classList.toggle("show", t.save>0);
+  document.getElementById("offerSave").textContent = "− " + fmt(t.save);
+  document.getElementById("subtotal").textContent = fmt(t.total);
+  /* free-delivery progress */
+  const pct = Math.min(100, Math.round(t.total/FREE_SHIP*100));
+  const fill = document.getElementById("shipFill"), msgEl = document.getElementById("shipMsg");
+  fill.style.width = (cart.length?pct:0) + "%";
+  fill.classList.toggle("done", t.total>=FREE_SHIP);
+  msgEl.classList.toggle("done", t.total>=FREE_SHIP);
+  msgEl.innerHTML = !cart.length
+    ? `Free island-wide delivery over <b>${fmt(FREE_SHIP)}</b>`
+    : (t.total>=FREE_SHIP
+      ? `✓ Free island-wide delivery unlocked`
+      : `<b>${fmt(FREE_SHIP - t.total)}</b> away from free island-wide delivery`);
+  let msg = "Hi Barracks! Order from the website:\n";
+  cart.forEach(it=>{
+    const p = PRODUCTS.find(x=>x.id===it.pid);
+    msg += `• ${it.qty}× ${p.name} (${p.colors[it.color].n}, ${it.size}) — ${fmt(p.price*it.qty)}\n`;
+  });
+  if(t.save>0) msg += `Offer applied: −${fmt(t.save)}\n`;
+  msg += `Total: ${fmt(t.total)} + delivery to (your address)`;
+  document.getElementById("waOrder").href = "https://wa.me/"+WA+"?text="+encodeURIComponent(msg);
+}
+function openCart(){ syncCart(); document.getElementById("drawer").classList.add("on"); document.getElementById("scrim").classList.add("on"); }
+function closeCart(){ document.getElementById("drawer").classList.remove("on"); document.getElementById("scrim").classList.remove("on"); }
+
+/* ═══════════ MISC ═══════════ */
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("on"), 2600);
+}
+function regSubmit(e){ e.preventDefault(); e.target.reset(); toast("Subscribed — drop alerts incoming."); }
+function contactSubmit(e){ e.preventDefault(); toast("Prototype — in production this reaches the store team. Try WhatsApp for a real reply."); }
+/* ═══════════ INSTANT SEARCH ═══════════ */
+function openSearch(){
+  document.getElementById("searchScrim").classList.add("on");
+  const inp = document.getElementById("searchInput");
+  inp.value = "";
+  searchRender();
+  setTimeout(()=>inp.focus(), 60);
+}
+function closeSearch(){ document.getElementById("searchScrim").classList.remove("on"); }
+function searchSet(q){ document.getElementById("searchInput").value = q; searchRender(); }
+function searchRender(){
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  const body = document.getElementById("searchBody");
+  if(!q){
+    body.innerHTML = `<div class="s-empty">
+      <p>Popular right now</p>
+      <div class="s-chips">
+        ${["Linen","Chinos","Oversize tee","Party shirt","Varsity"].map(c=>
+          `<button onclick="searchSet('${c.toLowerCase()}')">${c}</button>`).join("")}
+      </div></div>`;
+    return;
+  }
+  const hits = PRODUCTS.filter(p=>{
+    const hay = [p.name, p.fabric, p.fit, CATS.find(c=>c.key===p.cat).label, p.colors.map(c=>c.n).join(" ")].join(" ").toLowerCase();
+    return q.split(/\s+/).every(w=>hay.includes(w));
+  }).slice(0,6);
+  body.innerHTML = hits.map((p,i)=>`
+    <button class="s-row${i===0?" hot":""}" onclick="closeSearch();openProduct(${p.id})">
+      ${tileHTML(p,0,p.img||p.model)}
+      <span><b>${p.name}</b><span>${CATS.find(c=>c.key===p.cat).label} · ★ ${RATING[p.id][0]} · ${p.colors.length} colours</span></span>
+      <span class="price">${fmt(p.price)}</span>
+    </button>`).join("")
+    || `<div class="s-empty"><p>No matches for "${q}" — try a fabric or category.</p></div>`;
+}
+document.addEventListener("keydown", e=>{
+  const searching = document.getElementById("searchScrim").classList.contains("on");
+  if(e.key==="Escape"){ closeCart(); closeSearch(); }
+  const typing = /INPUT|TEXTAREA/.test(document.activeElement && document.activeElement.tagName || "");
+  if(e.key==="/" && !typing){ e.preventDefault(); openSearch(); }
+  if(e.key==="Enter" && searching){
+    const first = document.querySelector("#searchBody .s-row");
+    if(first){ e.preventDefault(); first.click(); }
+  }
+});
+
+/* ═══════════ TRACK ORDER (demo) ═══════════ */
+function trackSubmit(e){
+  e.preventDefault();
+  const no = document.getElementById("tr-no").value.trim() || "BRK-10482";
+  const day = ms => new Date(Date.now()-ms).toLocaleDateString("en-GB",{weekday:"short", day:"numeric", month:"short"});
+  const steps = [
+    {s:"done", t:"Order placed", d:day(2*864e5)+" · 14:32 — confirmed on WhatsApp"},
+    {s:"done", t:"Packed at Kohuwala store", d:day(2*864e5)+" · 18:05"},
+    {s:"done", t:"Handed to Trans Express", d:day(864e5)+" · 09:40 — waybill issued"},
+    {s:"now",  t:"Out for delivery", d:day(0)+" — rider is in your area"},
+    {s:"todo", t:"Delivered", d:"Signature on delivery"}
+  ];
+  document.getElementById("tlTitle").textContent = "Order " + no.toUpperCase();
+  document.getElementById("tlSteps").innerHTML = steps.map(x=>`
+    <div class="t-step ${x.s}">
+      <div class="t-dot">${x.s==="done"?"✓":""}</div>
+      <div><b>${x.t}</b><span>${x.d}</span></div>
+    </div>`).join("");
+  document.getElementById("timeline").classList.add("show");
+  toast("Demo timeline — production pulls live Trans Express tracking");
+}
+function accToggle(btn){
+  btn.parentElement.classList.toggle("open");
+}
+
+/* scroll reveal */
+function initReveal(){
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+  },{threshold:.12});
+  document.querySelectorAll(".rv,.rv-stagger").forEach(el=>io.observe(el));
+}
+
+/* boot sequence */
+updateWlUI();
+initHero();
+initMarquee();
+renderHome();
+renderStores();
+renderShop();
+syncCart();
+initReveal();
+countUp();
+</script>
+</body>
+</html>
