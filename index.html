@@ -389,21 +389,38 @@ header{
 .craft-item h3{font-size:22px;margin-bottom:10px}
 .craft-item p{font-size:14px;font-weight:300;color:var(--ink-2)}
 
-/* ---------- lookbook / world ---------- */
-.look-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px)}
-@media(max-width:860px){.look-grid{grid-template-columns:repeat(2,1fr)}}
-.look{
-  position:relative;aspect-ratio:9/14;overflow:hidden;background:var(--ecru);
-  display:flex;align-items:flex-end;
+/* ---------- trending — live social embeds ---------- */
+.embed-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px);
+  align-items:start;justify-items:stretch;
 }
-.look:hover .img-layer{transform:scale(1.05)}
-.look .shade{
-  position:absolute;inset:0;z-index:2;
-  background:linear-gradient(180deg,transparent 55%,rgba(24,26,20,.62));
+@media(max-width:1080px){.embed-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.embed-grid{grid-template-columns:1fr}}
+.embed-grid blockquote.tiktok-embed,
+.embed-grid blockquote.instagram-media{
+  margin:0!important;width:100%!important;min-width:0!important;max-width:none!important;
+  background:var(--ecru);border:1px solid var(--hairline-soft)!important;
+  border-radius:0!important;box-shadow:none!important;min-height:480px;
 }
-.look figcaption{position:relative;z-index:3;padding:18px;color:#fff}
-.look figcaption b{display:block;font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase}
-.look figcaption span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.66)}
+.embed-grid iframe{max-width:100%!important}
+/* pre-hydration fallback (shown until the platform scripts load) */
+.embed-fallback{
+  display:flex;flex-direction:column;justify-content:flex-end;gap:8px;
+  min-height:480px;padding:24px;text-align:left;
+}
+.embed-fallback .ef-net{font-size:9.5px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--olive)}
+.embed-fallback .ef-t{font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink)}
+.embed-fallback .ef-s{font-size:12px;font-weight:300;color:var(--ink-2)}
+.follow-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:clamp(30px,4vw,48px)}
+.follow-row .btn{padding:13px 24px;font-size:10px}
+
+/* ---------- store map embeds ---------- */
+.map-frame{background:var(--ecru)}
+.map-frame iframe{
+  position:absolute;inset:0;width:100%;height:100%;border:0;
+  filter:grayscale(1) contrast(.94) sepia(.06);transition:filter .6s var(--ease);
+}
+.store-card:hover .map-frame iframe{filter:none}
 
 /* ---------- stores ---------- */
 .store-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,28px)}
@@ -988,17 +1005,58 @@ footer ul li{font-size:13px;font-weight:300;color:rgba(255,255,255,.82)}
     </div>
   </section>
 
-  <!-- world of barracks -->
+  <!-- trending — the brand's actual feeds, embedded live -->
   <section>
     <div class="shell">
       <div class="sec-head rv">
         <span class="label">@barracksclothing</span>
-        <h2>The World of Barracks</h2>
-        <p>Drops, fittings and the life of the stores — followed by 239,000 on TikTok.</p>
+        <h2>Trending from the House</h2>
+        <p>The drops as they happen — live from the brand&rsquo;s own feeds, followed by 239,000 on TikTok.</p>
       </div>
-      <div class="look-grid rv-stagger" id="lookGrid"></div>
-      <div class="sec-foot rv">
-        <a class="tlink olive" href="https://www.tiktok.com/@barracksclothing" target="_blank" rel="noopener">Follow the house</a>
+      <!-- Real Barracks posts. The TikTok/Instagram scripts hydrate these into live players
+           in the visitor's browser; until then the styled fallback links show. -->
+      <div class="embed-grid rv-stagger">
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@barracksclothing/video/7532406738050419985"
+          data-video-id="7532406738050419985">
+          <section class="embed-fallback">
+            <span class="ef-net">TikTok</span>
+            <a target="_blank" rel="noopener" href="https://www.tiktok.com/@barracksclothing/video/7532406738050419985">
+              <span class="ef-t">Party Shirts, Fitted</span></a>
+            <span class="ef-s">Sri Lankan party shirts at Barracks Clothing — watch on TikTok.</span>
+          </section>
+        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@barracksclothing/video/7477536016660712722"
+          data-video-id="7477536016660712722">
+          <section class="embed-fallback">
+            <span class="ef-net">TikTok</span>
+            <a target="_blank" rel="noopener" href="https://www.tiktok.com/@barracksclothing/video/7477536016660712722">
+              <span class="ef-t">Luxury, Colombo Fashion</span></a>
+            <span class="ef-s">The house on film — watch on TikTok.</span>
+          </section>
+        </blockquote>
+        <blockquote class="instagram-media" data-instgrm-version="14"
+          data-instgrm-permalink="https://www.instagram.com/reel/DKD2et3Ixle/">
+          <section class="embed-fallback">
+            <span class="ef-net">Instagram</span>
+            <a target="_blank" rel="noopener" href="https://www.instagram.com/reel/DKD2et3Ixle/">
+              <span class="ef-t">The Track Bottom</span></a>
+            <span class="ef-s">Barracks Clothing lk — view the reel on Instagram.</span>
+          </section>
+        </blockquote>
+        <blockquote class="instagram-media" data-instgrm-version="14"
+          data-instgrm-permalink="https://www.instagram.com/reel/DHQISe0oZKk/">
+          <section class="embed-fallback">
+            <span class="ef-net">Instagram</span>
+            <a target="_blank" rel="noopener" href="https://www.instagram.com/reel/DHQISe0oZKk/">
+              <span class="ef-t">The Varsity Jacket</span></a>
+            <span class="ef-s">Barracks Clothing lk — view the reel on Instagram.</span>
+          </section>
+        </blockquote>
+      </div>
+      <div class="follow-row rv">
+        <a class="btn" href="https://www.tiktok.com/@barracksclothing" target="_blank" rel="noopener">TikTok — 239.2K</a>
+        <a class="btn" href="https://www.instagram.com/barracksclothing/" target="_blank" rel="noopener">Instagram — 29K</a>
+        <a class="btn" href="https://www.facebook.com/barracks.lk/" target="_blank" rel="noopener">Facebook — 32K</a>
       </div>
     </div>
   </section>
@@ -1009,7 +1067,8 @@ footer ul li{font-size:13px;font-weight:300;color:rgba(255,255,255,.82)}
       <div class="sec-head rv">
         <span class="label">Two doors, seven days</span>
         <h2>The Stores</h2>
-        <p>Dutugemunu Street and Nikape Road — the same standard, both sides of the flyover.</p>
+        <p>Dutugemunu Street and Nikape Road — the same standard, both sides of the flyover.
+        Photographs of both houses live on their Google Maps listings.</p>
       </div>
       <div class="store-grid rv-stagger" id="storeGridHome"></div>
     </div>
@@ -1440,6 +1499,20 @@ const PRODUCTS = [
    desc:"The piece that sells out on film. A structured felt body, contrast sleeves and ribbed trims — cut boxy to layer over anything.",
    details:["Snap closure with metal hardware","Ribbed collar, cuffs and hem keep their bounce","An interior pocket, sized for a phone"]}
 ];
+/* ═══════════ REAL PRODUCT PHOTOGRAPHY (swap-in point) ═══════════
+   The brand's own product photos live on barracks.lk (Shopify CDN) — they cannot be
+   fetched from this build environment, so the placeholders above stand in. To swap in
+   the real shots: open the product on barracks.lk → right-click the image → Copy image
+   address → paste below. Entries override the placeholder everywhere (cards, PDP, bag).
+   Example:
+     1:{img:"https://cdn.shopify.com/s/files/.../golf-chino-front.jpg",
+        model:"https://cdn.shopify.com/s/files/.../golf-chino-worn.jpg"},        */
+const BRAND_PHOTOS = {};
+Object.entries(BRAND_PHOTOS).forEach(([id,o])=>{
+  const p = PRODUCTS.find(x=>x.id===+id);
+  if(p) Object.assign(p,o);
+});
+
 const CATS = [
   {key:"all", label:"All Pieces"},
   {key:"trousers", label:"Trousers"},
@@ -1462,23 +1535,21 @@ const COLLS = [
   {label:"Shirting", sub:"Cuban Collar · Band Collar", filter:"shirting", icon:"g-shirt", c:"#97A08A", img:U(IMGS.shirtModel,900)},
   {label:"The Essentials", sub:"Oversized Tees · Polos", filter:"tees", icon:"g-tee", c:"#26282A", img:U(IMGS.teeModel,900)}
 ];
-const LOOKS = [
-  {t:"The Evening Shirt", s:"Cuban collar · Colombo", img:U(IMGS.shirtModel,700), c:"#97A08A", icon:"g-shirt", url:"https://www.tiktok.com/@barracksclothing"},
-  {t:"The Varsity Drop", s:"New in store", img:U(IMGS.jacketModel,700), c:"#2E3A4A", icon:"g-jacket", url:"https://www.tiktok.com/@barracksclothing"},
-  {t:"The Standard Offer", s:"Two trousers · Rs 5,000", img:U(IMGS.chinoModel,700), c:"#4A5240", icon:"g-pants", url:"https://www.tiktok.com/@barracksclothing"},
-  {t:"The Oversized Tee", s:"Fitted at Kohuwala", img:U(IMGS.teeModel,700), c:"#26282A", icon:"g-tee", url:"https://www.instagram.com/barracksclothing/"}
-];
 const HERO_SLIDES = [
   {img:U(IMGS.heroPortrait,1800), alt:"Barracks campaign portrait", cap:"Campaign · The Standard"},
   {img:U(IMGS.heroStreet,1800), alt:"The wide fold trouser, worn", cap:"The Wide Fold · New"},
   {img:U(IMGS.jacketModel,1800), alt:"The varsity jacket, editorial", cap:"Varsity · Returned"},
   {img:U(IMGS.heroRack,1800), alt:"Inside the Kohuwala store", cap:"Inside Kohuwala"}
 ];
+/* Live Google Maps embeds — no API key needed; the map (and the shop's real
+   Google photos, one tap behind "Directions & Photos") render in the visitor's browser. */
 const STORES = [
   {name:"Kohuwala", addr:"105 Dutugemunu Street, Kohuwala", hrs:"Open daily · 10:30–20:30",
-   img:U(IMGS.heroRack,1100), map:"https://maps.app.goo.gl/h55XCDHyp8iNQaFo6"},
+   map:"https://maps.app.goo.gl/h55XCDHyp8iNQaFo6",
+   embed:"https://maps.google.com/maps?q=Barracks%20Clothing%2C%20105%20Dutugemunu%20Street%2C%20Kohuwala%2C%20Sri%20Lanka&z=16&output=embed"},
   {name:"Dehiwala", addr:"75 Nikape Road, Dehiwala", hrs:"Open daily · 10:30–20:30",
-   img:U(IMGS.storefront,1100), map:"https://www.google.com/maps/search/?api=1&query=75+Nikape+Road+Dehiwala"}
+   map:"https://www.google.com/maps/search/?api=1&query=Barracks+Clothing+75+Nikape+Road+Dehiwala",
+   embed:"https://maps.google.com/maps?q=Barracks%20Clothing%2C%2075%20Nikape%20Road%2C%20Dehiwala%2C%20Sri%20Lanka&z=16&output=embed"}
 ];
 const FREE_SHIP = 7500;
 const OFFER_PRICE = 5000;
@@ -1600,30 +1671,18 @@ function initHome(){
   const latest = PRODUCTS.filter(p=>p.flag==="New").concat(PRODUCTS.filter(p=>p.flag!=="New")).slice(0,6);
   document.getElementById("newRail").innerHTML = latest.map(cardHTML).join("");
 
-  document.getElementById("lookGrid").innerHTML = LOOKS.map(l=>`
-    <a class="look" href="${l.url}" target="_blank" rel="noopener">
-      <div class="tile" style="position:absolute;inset:0;color:${l.c}">
-        <svg class="garment" viewBox="0 0 100 100"><use href="#${l.icon}"/></svg>
-      </div>
-      ${imgTag(l.img,"",l.t)}
-      <div class="shade"></div>
-      <figcaption><b>${l.t}</b><span>${l.s}</span></figcaption>
-    </a>`).join("");
-
   const storeHTML = STORES.map(s=>`
     <div class="store-card">
-      <div class="frame">
-        <div class="tile" style="position:absolute;inset:0;color:var(--olive)">
-          <svg class="garment" viewBox="0 0 100 100"><use href="#g-jacket"/></svg>
-        </div>
-        ${imgTag(s.img,"","Barracks "+s.name)}
+      <div class="frame map-frame">
+        <iframe src="${s.embed}" loading="lazy" title="Map — Barracks ${s.name}"
+          referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       </div>
       <div class="store-body">
         <h3>${s.name}</h3>
         <span class="addr">${s.addr}</span>
         <span class="hrs">${s.hrs}</span>
         <div class="store-ctas">
-          <a class="btn" href="${s.map}" target="_blank" rel="noopener">Directions</a>
+          <a class="btn" href="${s.map}" target="_blank" rel="noopener">Directions &amp; Photos</a>
           <a class="btn" href="https://wa.me/${WA}?text=Hello%20Barracks%20${s.name}!" target="_blank" rel="noopener">WhatsApp</a>
         </div>
       </div>
@@ -1966,5 +2025,8 @@ renderCart();
 updateWlUI();
 observeReveals();
 </script>
+<!-- Live social embeds — hydrate the real @barracksclothing posts above -->
+<script async src="https://www.tiktok.com/embed.js"></script>
+<script async src="https://www.instagram.com/embed.js"></script>
 </body>
 </html>

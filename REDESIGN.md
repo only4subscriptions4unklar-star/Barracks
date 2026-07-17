@@ -253,6 +253,21 @@ first "clean iOS" prototype (`prototype/index.html`):
 Photography remains Unsplash placeholder; the §4 open questions (palette verification,
 tagline sign-off, policy numbers) apply to this build equally.
 
+**Live-content update (17 Jul 2026).** Three classes of real content are now wired in:
+
+- **Trending social section** — real @barracksclothing posts embedded live (two TikTok
+  videos + two Instagram reels, verified URLs), hydrated client-side by the official
+  TikTok/Instagram embed scripts with styled non-JS fallbacks; follow buttons carry the
+  verified counts (TikTok 239.2K · IG 29K · FB 32K).
+- **Store locations** — real Google Maps embeds (`output=embed`, no API key) for both
+  stores, in a monochrome treatment that colors on hover; "Directions & Photos" links to
+  each store's Maps listing, where the real shop photographs live.
+- **Product photography** — still placeholder by necessity: the build environment cannot
+  reach barracks.lk/Shopify CDN or Google's image hosts, and Google-hosted place photos
+  cannot be hotlinked durably anyway. A `BRAND_PHOTOS` override map at the top of the
+  script is the one-paste swap-in point for the store's real image URLs (documented
+  inline); placeholders are mapped per product description in the meantime.
+
 ### Source index
 
 - Store: [barracks.lk](https://barracks.lk/) · [collections](https://barracks.lk/collections) ·
