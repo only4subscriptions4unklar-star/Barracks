@@ -1404,6 +1404,16 @@ const IMGS = {
   storefront:"photo-1441984904996-e0b6ba687e04"
 };
 
+/* Professional, watermark-free photography — all Unsplash-licensed (free for commercial
+   use, no attribution required). Closer-match candidate shots load first; if a candidate
+   URL ever fails, the loader falls back to a verified stand-in, then to the designed
+   garment tile — the layout can never break. Note: Pinterest was requested as a source,
+   but pins are generally copyrighted images owned by other brands and photographers, so
+   republishing them would expose Barracks to takedowns; licensed stock is the safe
+   equivalent until the brand's own shoots go into BRAND_PHOTOS below. */
+const IMG_FALLBACKS = {};
+const CAND = (id, fallbackUrl) => { const u = U(id); IMG_FALLBACKS[u] = fallbackUrl; return u; };
+
 /* ═══════════ PRODUCTS (sample data — prototype) ═══════════ */
 const CH_PANTS = (extra)=>({cols:["Size","Waist (in)","Hip (in)","Length (in)"],
   rows:[["28","28–29","36",extra[0]],["30","30–31","38",extra[1]],["32","32–33","40",extra[2]],["34","34–35","42",extra[3]],["36","36–37","44",extra[4]],["38","38–39","46",extra[5]]]});
@@ -1446,7 +1456,7 @@ const PRODUCTS = [
    details:["Drizzle beads and rolls from the coated shell","Zipped security pockets, front and back","Dry within the hour after a full soak"]},
   {id:5, name:"The Oversized Tee", cat:"tees", icon:"g-tee", price:1950, offer:false, flag:"New",
    fabric:"220gsm combed cotton", fit:"Oversized, drop shoulder", care:"Cold wash, no tumble",
-   img:U(IMGS.teeFlat), model:U(IMGS.teeModel),
+   img:CAND("photo-1618354691373-d851c5c3a990", U(IMGS.teeFlat)), model:U(IMGS.teeModel),
    colors:[{n:"Off-White",h:"#CFCBBE"},{n:"Black",h:"#26282A"},{n:"Olive",h:"#4A5240"},{n:"Washed Blue",h:"#5A6C7E"}],
    sizes:["S","M","L","XL","XXL"],
    chart:{cols:["Size","Chest (in)","Length (in)","Shoulder (in)"],rows:[["S","42","28","19"],["M","44","29","20"],["L","46","30","21"],["XL","48","31","22"],["XXL","50","32","23"]]},
@@ -1455,7 +1465,7 @@ const PRODUCTS = [
    details:["220gsm — substance without heat","A ribbed collar that keeps its shape past fifty washes","Shrink-controlled: your usual size, the same fit, always"]},
   {id:6, name:"The Performance Crew", cat:"tees", icon:"g-tee", price:1450, offer:false, flag:"The Original",
    fabric:"Performance micro-poly", fit:"Athletic", care:"Quick-dry, machine wash",
-   img:U(IMGS.teeStack), model:U(IMGS.athModel),
+   img:U(IMGS.teeStack), model:CAND("photo-1583743814966-8936f5b7be1a", U(IMGS.athModel)),
    colors:[{n:"Black",h:"#26282A"},{n:"White",h:"#CFCBBE"},{n:"Maroon",h:"#6B3238"}],
    sizes:["S","M","L","XL","XXL"],
    chart:{cols:["Size","Chest (in)","Length (in)","Shoulder (in)"],rows:[["S","38","27","17"],["M","40","28","18"],["L","42","29","19"],["XL","44","30","20"],["XXL","46","31","21"]]},
@@ -1482,7 +1492,7 @@ const PRODUCTS = [
    details:["A drape that is never boxy, never clinging","The camp collar lies flat without ironing","From first dates to receptions, unbothered"]},
   {id:9, name:"The Band Collar Shirt", cat:"shirting", icon:"g-shirt", price:3250, offer:false, flag:null,
    fabric:"Cotton poplin", fit:"Slim", care:"Warm iron",
-   img:null, model:U(IMGS.portrait),
+   img:null, model:CAND("photo-1611312449408-fcece27cdbb7", U(IMGS.portrait)),
    colors:[{n:"White",h:"#CFCBBE"},{n:"Black",h:"#26282A"},{n:"Olive",h:"#4A5240"}],
    sizes:["S","M","L","XL","XXL"],
    chart:{cols:["Size","Chest (in)","Length (in)","Shoulder (in)"],rows:[["S","38","28","17"],["M","40","29","17.5"],["L","42","30","18"],["XL","44","31","19"],["XXL","46","32","20"]]},
@@ -1491,7 +1501,7 @@ const PRODUCTS = [
    details:["Crisp poplin, soft-wash finished","A collar band that stands unaided","Slim through the body, full in the shoulder"]},
   {id:10, name:"The Varsity Jacket", cat:"outerwear", icon:"g-jacket", price:5900, offer:false, flag:"New",
    fabric:"Felt body, PU sleeves", fit:"Boxy", care:"Spot clean",
-   img:U(IMGS.jacketStreet), model:U(IMGS.jacketModel),
+   img:CAND("photo-1617127365659-c47fa864d8bc", U(IMGS.jacketStreet)), model:U(IMGS.jacketModel),
    colors:[{n:"Black/Cream",h:"#26282A"},{n:"Wine",h:"#6B3238"},{n:"Navy",h:"#2E3A4A"}],
    sizes:["S","M","L","XL"],
    chart:{cols:["Size","Chest (in)","Length (in)","Sleeve (in)"],rows:[["S","44","26","24"],["M","46","27","24.5"],["L","48","28","25"],["XL","50","29","25.5"]]},
@@ -1590,7 +1600,12 @@ const heartSVG = `<svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.7-9.5-9A5.4 
 function imgTag(url, cls="", alt=""){
   if(!url) return "";
   return `<img class="img-layer ${cls}" alt="${alt}" loading="lazy" src="${url}"
-    onload="this.classList.add('loaded')" onerror="this.classList.add('gone')">`;
+    onload="this.classList.add('loaded')" onerror="imgFail(this)">`;
+}
+function imgFail(img){
+  const next = IMG_FALLBACKS[img.getAttribute("src")];
+  if(next){ img.src = next; }
+  else img.classList.add("gone");
 }
 function tileHTML(p, colorIdx=0, photo=null, photoCls=""){
   const c = p.colors[colorIdx];

@@ -266,7 +266,13 @@ tagline sign-off, policy numbers) apply to this build equally.
   reach barracks.lk/Shopify CDN or Google's image hosts, and Google-hosted place photos
   cannot be hotlinked durably anyway. A `BRAND_PHOTOS` override map at the top of the
   script is the one-paste swap-in point for the store's real image URLs (documented
-  inline); placeholders are mapped per product description in the meantime.
+  inline); placeholders are mapped per product description in the meantime. All stock
+  imagery is Unsplash-licensed (professional, watermark-free, cleared for commercial
+  use) — Pinterest-sourced pins were declined as they are generally copyrighted third-
+  party images. Candidate shots load through an `IMG_FALLBACKS` chain (better-match
+  candidate → verified stand-in → designed garment tile), so a dead URL can never break
+  the layout; each PDP also links to its live barracks.lk collection for the brand's
+  actual photos and stock.
 
 ### Source index
 
