@@ -229,6 +229,30 @@ bottom-sheet cart, tap-to-WhatsApp everywhere. Test at 360px first, desktop seco
 
 ---
 
+## 5 · Addendum — the luxury build (`index.html`)
+
+Following client direction, a second full prototype was built at the repo root
+(`index.html`): a **luxury-house treatment** in the register of Ralph Lauren / Lacoste /
+Crocodile, holding the Barracks palette (olive `#4A5240` / `#343A2D`, ink `#1B1C18`,
+ecru/ivory grounds, signal orange reserved for the Standard Offer). Key moves versus the
+first "clean iOS" prototype (`prototype/index.html`):
+
+- **Type:** Cormorant Garamond display serif + Jost letter-spaced small caps replace
+  Space Grotesk/Manrope; the serif "B" crest and wordmark move to a centered masthead.
+- **Form language:** sharp corners, hairline rules and framed imagery replace rounded
+  cards and soft shadows; buttons become bordered small-caps rectangles.
+- **Voice:** "the house / the concierge / the Standard Offer" — offers presented with
+  restraint (a dark olive editorial band) rather than badges and countdown energy.
+- **Structure kept:** SPA with shop, PDP (swatches, size guide, accordions), bag drawer
+  with the auto-applied 2-for-5,000 logic, spotlight search, stores, order tracking and
+  exchanges pages; WhatsApp remains a first-class path throughout. Sample reviews and
+  low-stock urgency were deliberately dropped — off-register for the luxury direction.
+- Verified headless (Chromium): all pages render, offer math correct (Rs 2,750 + 2,950 →
+  Rs 5,000), no console errors, no horizontal scroll at 390px.
+
+Photography remains Unsplash placeholder; the §4 open questions (palette verification,
+tagline sign-off, policy numbers) apply to this build equally.
+
 ### Source index
 
 - Store: [barracks.lk](https://barracks.lk/) · [collections](https://barracks.lk/collections) ·
