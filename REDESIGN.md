@@ -260,7 +260,12 @@ full-color maps; iOS input-zoom is prevented (16px form inputs); the hero uses `
 units for mobile URL-bar behavior; safe-area insets cover notched phones; tablets get
 dedicated grid steps (3-up shop at 768px, 2-up stores/collections); and the heavy
 TikTok/Instagram embed scripts lazy-load only when the trending section approaches the
-viewport.
+viewport. Phones additionally get a native mobile navigation: hamburger → full-screen
+maison menu (serif links, Standard Offer accent, search/saved/orders utilities, WhatsApp
+concierge and social links) replacing the desktop nav row below 860px, a slimmer
+two-row sticky header, body scroll-locking behind menu/bag/search overlays, a search
+icon in the masthead, a per-product WhatsApp button in the sticky buy bar, and a
+progressively shortening single-line announcement bar.
 
 **Live-content update (17 Jul 2026).** Three classes of real content are now wired in:
 
