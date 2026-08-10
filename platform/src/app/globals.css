@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   BARRACKS — design tokens
+   ----------------------------------------------------------------------------
+   Every colour, type step, space and motion value the storefront may use lives
+   here. Components reference tokens, never raw hex or magic numbers (§66).
+
+   The palette is the approved Barracks direction: olive and ink on warm ivory,
+   with signal orange reserved exclusively for the Standard Offer so it never
+   loses its meaning through overuse.
+   ========================================================================== */
+@theme {
+  /* ---- Colour ---- */
+  --color-ink: #1b1c18;
+  --color-ink-2: #61635a;
+  --color-ink-3: #9a9c92;
+  --color-paper: #fcfbf8;
+  --color-ecru: #f4f2ea;
+  --color-ecru-2: #ece9de;
+  --color-olive: #4a5240;
+  --color-olive-deep: #343a2d;
+  --color-olive-night: #23271f;
+  --color-sand: #b8a582;
+  --color-stone: #a39d8d;
+  --color-signal: #e8722e;
+  --color-hairline: rgb(27 28 24 / 0.16);
+  --color-hairline-soft: rgb(27 28 24 / 0.09);
+
+  /* ---- Type families ---- */
+  --font-serif: var(--font-serif), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-sans), "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* ---- Type scale (fluid; never an arbitrary size at a call site) ---- */
+  --text-display: clamp(2.75rem, 1.6rem + 5.6vw, 5.25rem);
+  --text-h1: clamp(2rem, 1.35rem + 3.2vw, 3.5rem);
+  --text-h2: clamp(1.6rem, 1.2rem + 2vw, 2.75rem);
+  --text-h3: clamp(1.25rem, 1.1rem + 0.9vw, 1.75rem);
+  --text-body-lg: 1.0625rem;
+  --text-body: 0.9375rem;
+  --text-small: 0.8125rem;
+  --text-label: 0.6875rem;
+  --text-meta: 0.625rem;
+
+  /* ---- Letter spacing: the small-caps label is a Barracks signature ---- */
+  --tracking-label: 0.24em;
+  --tracking-wordmark: 0.34em;
+
+  /* ---- Space ---- */
+  --spacing-gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --spacing-section: clamp(3.5rem, 8vw, 6.875rem);
+
+  /* ---- Structure ---- */
+  --radius-none: 0px;
+  --container-shell: 85rem;
+
+  /* ---- Motion: quick enough that commerce never waits on choreography ---- */
+  --ease-standard: cubic-bezier(0.22, 0.08, 0.18, 1);
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 900ms;
+
+  /* ---- Layering ---- */
+  --z-header: 80;
+  --z-drawer: 95;
+  --z-overlay: 110;
+  --z-toast: 120;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.12;
+  }
+
+  /* A visible, on-brand focus ring. The previous prototype had no
+     focus-visible styling at all, which made the site unusable by keyboard. */
+  :focus-visible {
+    outline: 2px solid var(--color-olive);
+    outline-offset: 3px;
+  }
+
+  /* Touch targets stay comfortable on coarse pointers (§54). */
+  @media (pointer: coarse) {
+    button,
+    a[role="button"] {
+      min-height: 44px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@utility label {
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}

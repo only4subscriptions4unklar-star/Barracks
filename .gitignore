@@ -1,2 +1,6 @@
 .claude/settings.local.json
 barracks-website-deploy.zip
+platform/node_modules/
+platform/.next/
+platform/.env*.local
+platform/next-env.d.ts
