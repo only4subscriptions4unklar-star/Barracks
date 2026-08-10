@@ -4,3 +4,4 @@ platform/node_modules/
 platform/.next/
 platform/.env*.local
 platform/next-env.d.ts
+barracks-handover.zip
